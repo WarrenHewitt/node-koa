@@ -1,0 +1,28 @@
+{
+  "name": "koa-server",
+  "version": "1.0.0",
+  "description": "no",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "dev": "pm2 start app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "koa"
+  ],
+  "author": "hew",
+  "license": "MIT",
+  "dependencies": {
+    "koa": "^2.4.1",
+    "koa-body": "^2.5.0",
+    "koa-multer": "^1.0.2",
+    "koa-router": "^7.3.0",
+    "koa-session": "^5.8.1",
+    "koa-static": "^4.0.2",
+    "koa-views": "^6.1.4",
+    "koa2-cors": "^2.0.5",
+    "mongodb": "^3.0.4",
+    "nodemon": "^1.17.1"
+  }
+}
