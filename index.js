@@ -87,54 +87,10 @@ router.post('/api/files/i', koaBody({ jsonLimit: '2mb', multipart: true }), asyn
 
 function uid() {
     return Math.random().toString(36).slice(2);
-  }
+}
 
-router.get('/nnn', (ctx, next) => {
-    ctx.response.body = '1222'
-})
-
-// return html page
-router.get('/', (ctx, next) => {
-    ctx.response.type = 'html';
-    ctx.response.body = fs.createReadStream('./views/index.html');
-
-    return next();
-})
-
-router.get('/static', async (ctx, next) => {
-    await ctx.render('test')
-
-    //return next();
-})
-
-router.get('/html', (ctx, next) => {
-    console.log(ctx.cookies.get('SESSION')); 
-    ctx.cookies.set('name', 'klice')
-    ctx.response.type = 'html';
-    ctx.response.body = fs.createReadStream('./dist/index.html');
-
-    return next();
-    /* var a = {
-        fields: { name: '1.png' },
-        files: {
-                data:
-                    File {
-                        domain: null,
-                        _events: { },
-                        _eventsCount: 0,
-                        _maxListeners: undefined,
-                        size: 647705,
-                        path: 'C:\\Users\\HeWei\\AppData\\Local\\Temp\\upload_993d1451ef1c810b9b8a341e6bd3fd66',
-                        name: '1.png',
-                        type: 'image/png',
-                        hash: null,
-                        lastModifiedDate: 2018-03 - 30T03: 10: 26.855Z,
-                            _writeStream: [Object]
-                    } 
-        } 
-    } */
-})
-
+const api = require('./app/router')
+api(router)
 
 app.listen(1112, () => {
     console.log('http://localhost:1112');
