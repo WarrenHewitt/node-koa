@@ -29,7 +29,7 @@ app
     .use(views(__dirname + '/views', { extension: 'pug' }))
     .use(cors({
         origin: function (ctx) {
-            return 'http://localhost:1111';
+            return 'http://localhost:1800';
         },
         exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
         maxAge: 5,
