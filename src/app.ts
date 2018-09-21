@@ -1,5 +1,10 @@
-const Koa = require('koa')
-const Router = require('koa-router')
+import Koa from 'koa'
+import Router from 'koa-router'
+
+/**
+ * @description 当没有默认导出时要用 * 防止报错
+ */
+import * as api from './controllers/api'
 
 const app = new Koa()
 const router = new Router()
@@ -7,9 +12,11 @@ const router = new Router()
 app.use(router.routes())
 
 router.get('/', (ctx: any) => {
-    ctx.response.body = '12333'
+    ctx.response.body = 'hello koa-typescript'
 })
 
-app.listen(1112, () => {
-    console.log('listen on port: 1112');
+router.get('/api/names/', api.getNames)
+
+app.listen(2500, () => {
+    console.log('listen on port: 2500');
 });
