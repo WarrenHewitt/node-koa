@@ -23,6 +23,7 @@ router.get('/', (ctx) => {
     ctx.response.body = 'hello koa-typescript';
 });
 router.get('/api/names/', api.getNames);
+router.get('/api/table-list/', api.getTableList);
 app.listen(2500, () => {
     console.log('listen on port: 2500');
 });
