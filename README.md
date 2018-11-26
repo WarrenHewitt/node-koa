@@ -6,7 +6,7 @@
 ## Install
 - @types/koa
 - @types/koa-router
-- @types/node
+- @types/node  可以引入node的包
 
 ## 开始
 执行如下命令
@@ -18,5 +18,7 @@
 # 语法
 
 ## Request
+
+- 当没有默认导出时要用 * 防止报错  import * as api from './controllers/api'
 
 - ctx.request.query：获取query string参数 以{ key:value } 形式返回
