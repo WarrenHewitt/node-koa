@@ -6,10 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>IndexedDB</title>
+    <style>
+        button {
+            margin: 10px 0;
+            padding: 8px 10px;
+            border: 0;
+            color: #fff;
+            background-color: rgb(7, 196, 230);
+        }
+    </style>
 </head>
 
 <body>
     <h1>indexedDB</h1>
+
+    <button onclick="addDBData()">设置</button>
+    <button onclick="getDBData()">获取</button>
+
 
     <div id="display">
 
@@ -17,8 +30,73 @@
 
     <script>
         window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+        if (!window.indexedDB) {
+            alert('不支持indexDB')
+        }
         document.getElementById('display').innerHTML = window.indexedDB
         console.log(window.indexedDB);
+
+        const DATA_BASE = 'TEST_DB'
+        let db = {}
+
+        // 不存在当前数据库时，即为创建
+        const request = window.indexedDB.open(DATA_BASE, 1)  // open参数：数据库名称，版本号（整数）
+
+        request.onerror = function (e) {
+            console.error('error', e)
+        }
+
+        request.onsuccess = function (event) {
+            db = event.target.result
+        };
+
+        request.onupgradeneeded = function (event) {
+            db = event.target.result
+
+            const objectStore = db.createObjectStore('users', { keyPath: 'ssn' })
+
+            objectStore.createIndex('name', 'name', { unique: false })
+
+            objectStore.transaction.oncomplete = function (eventComplete) {
+                const userObjectStore = db.transaction('users', 'readwrite').objectStore('users')
+
+                userObjectStore.add({ ssn: '444-44-4444', name: 'hew' })
+
+            }
+        }
+
+        function addDBData() {
+            const transaction = db.transaction(['users'], 'readwrite')
+            const objectStore = transaction.objectStore('users')
+            const request = objectStore.add({ ssn: '444-44-4444', name: 'hew' })
+
+            transaction.oncomplete = function (event) {
+                console.log('read complete', event)
+            }
+
+            transaction.onerror = function (error) {
+                console.error('transaction error', error)
+            }
+
+            request.onsuccess = function (event) {
+                console.log('read complete', request.result)
+            }
+        }
+
+        function getDBData() {
+            const transaction = db.transaction(['users'], 'readwrite')
+            const objectStore = transaction.objectStore('users')
+            const request = objectStore.get('444-44-4444')
+
+            request.onsuccess = function (event) {
+                console.log('read complete', request.result)
+            }
+
+            request.onerror = function (err) {
+                console.error(err)
+            }
+        }
+
 
     </script>
 

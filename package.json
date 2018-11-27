@@ -4,8 +4,8 @@
   "description": "no",
   "main": "index.js",
   "scripts": {
-    "start": "tsc -w ",
-    "serve": "nodemon dist/app.js",
+    "start": "nodemon dist/app.js",
+    "watch": "tsc -w ",
     "dev": "pm2 start app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
