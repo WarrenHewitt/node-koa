@@ -94,7 +94,7 @@
                 window.addEventListener('DOMContentLoaded', this.setRoute)
 
                 // 1.直接更改浏览器地址，在最后面增加或改变#hash； 
-                // 2.通过改变location.href或location.hash的值； 
+                // 2.通过改变location.href 或 location.hash的值； 
                 // 3.通过触发点击带锚点的链接； 
                 // 4.浏览器前进后退可能导致hash的变化，前提是两个网页地址中的hash值不同
                 window.addEventListener('hashchange', this.setRoute)
@@ -165,8 +165,12 @@
 
             init() {
                 window.addEventListener('DOMContentLoaded', () => {
-                    // 针对F5刷新问题，可以使用？后面跟参数形式
-                    // console.log(location.href.substr(15)); 
+                    // 针对F5刷新问题:
+                    // 1.可以使用？后面跟参数形式
+                    // 2.统一入口利用忽略地址方式（后端配置 /page/:path 忽略page后跟的所有地址，通过前端去请求page后的对应路由数据，如下）
+
+                    const path = location.href.split('/page/') 
+                    this.skip(path[1])
                 })
 
                 // 调用history.pushState()或history.replaceState()不会触发popstate。

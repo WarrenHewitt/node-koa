@@ -5,9 +5,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
-function renderHtml(ctx, next) {
+function renderSPA(ctx, next) {
+    // console.log('/:path', ctx.params.path);
     ctx.response.type = 'html';
     ctx.response.body = fs_1.default.createReadStream('./src/public/files/singlePageRoute.html');
+    return next();
+}
+exports.renderSPA = renderSPA;
+function renderHtml(ctx, next) {
+    const pages = ['indexedDB'];
+    let name = ctx.params.htmlFileName;
+    name = pages.indexOf(name) > -1 ? name : pages[0];
+    ctx.response.type = 'html';
+    ctx.response.body = fs_1.default.createReadStream(`./src/public/files/${name}.html`);
     return next();
 }
 exports.renderHtml = renderHtml;

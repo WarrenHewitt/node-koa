@@ -17,6 +17,9 @@
 
 # 语法
 
+## koa-router 
+- /page/:path  利用 ctx.params.path 获取
+
 ## Request
 
 - 当没有默认导出时要用 * 防止报错  import * as api from './controllers/api'

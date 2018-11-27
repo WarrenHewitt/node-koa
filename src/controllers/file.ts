@@ -1,9 +1,22 @@
 import fs from 'fs'
 import path from 'path'
 
-export function renderHtml(ctx: any, next: Function) {
+export function renderSPA(ctx: any, next: Function) {
+    // console.log('/:path', ctx.params.path);
     ctx.response.type = 'html';
     ctx.response.body = fs.createReadStream('./src/public/files/singlePageRoute.html');
+
+    return next();
+}
+
+export function renderHtml(ctx: any, next: Function) {
+    const pages = ['indexedDB']
+    let name = ctx.params.htmlFileName 
+
+    name = pages.indexOf(name) > -1 ? name : pages[0]
+
+    ctx.response.type = 'html';
+    ctx.response.body = fs.createReadStream(`./src/public/files/${name}.html`);
 
     return next();
 }

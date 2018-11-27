@@ -25,7 +25,8 @@ router.get('/', (ctx) => {
 });
 router.get('/api/names/', api.getNames);
 router.get('/api/table-list/', api.getTableList);
-router.get('/api/html/', file.renderHtml);
+router.get('/page/:path', file.renderSPA);
+router.get('/html/:htmlFileName', file.renderHtml);
 app.listen(2500, () => {
     console.log('listen on port: 2500');
 });
