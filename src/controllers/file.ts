@@ -4,7 +4,7 @@ import path from 'path'
 export function renderSPA(ctx: any, next: Function) {
     // console.log('/:path', ctx.params.path);
     ctx.response.type = 'html';
-    ctx.response.body = fs.createReadStream('./src/public/files/singlePageRoute.html');
+    ctx.response.body = fs.createReadStream('./dist/public/files/singlePageRoute.html');
 
     return next();
 }
@@ -16,7 +16,7 @@ export function renderHtml(ctx: any, next: Function) {
     name = pages.indexOf(name) > -1 ? name : pages[0]
 
     ctx.response.type = 'html';
-    ctx.response.body = fs.createReadStream(`./src/public/files/${name}.html`);
+    ctx.response.body = fs.createReadStream(`./dist/public/files/${name}.html`);
 
     return next();
 }
