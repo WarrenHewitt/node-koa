@@ -5,6 +5,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
+function kmh(ctx, next) {
+    ctx.response.type = 'html';
+    ctx.response.body = fs_1.default.createReadStream('./dist/public/kmh/index.html');
+    return next();
+}
+exports.kmh = kmh;
 function renderSPA(ctx, next) {
     // console.log('/:path', ctx.params.path);
     ctx.response.type = 'html';
