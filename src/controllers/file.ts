@@ -1,6 +1,13 @@
 import fs from 'fs'
 import path from 'path'
 
+export function kmh(ctx: any, next: Function) {
+    ctx.response.type = 'html';
+    ctx.response.body = fs.createReadStream('./dist/public/kmh/index.html');
+
+    return next();
+}
+
 export function renderSPA(ctx: any, next: Function) {
     // console.log('/:path', ctx.params.path);
     ctx.response.type = 'html';

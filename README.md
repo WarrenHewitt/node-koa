@@ -6,7 +6,7 @@
 ## Install
 - @types/koa
 - @types/koa-router
-- @types/node  可以引入node的包
+- @types/node  可以引入node相关所有包
 
 ## 开始
 执行如下命令
