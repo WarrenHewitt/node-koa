@@ -19,6 +19,10 @@ router.get('/', (ctx: any) => {
 router.get('/api/names/', api.getNames)
 router.get('/api/table-list/', api.getTableList)
 
+
+/**
+ * @desc 以下两个接口用于单页面路由与indexedDB
+ */
 router.get('/page/:path', file.renderSPA)
 router.get('/html/:htmlFileName', file.renderHtml)
 

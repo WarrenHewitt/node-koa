@@ -34,6 +34,10 @@
         <button onclick="delDBData()">删除数据</button>
         <input type="text" id="delID" placeholder="请输入ID">
     </div>
+    <div>
+        <button onclick="updateDBData()">更新数据</button>
+        <input type="text" id="updateID" placeholder="请输入ID">
+    </div>
 
 
     <div id="display">
@@ -148,13 +152,36 @@
             const request = objectStore.get(id)
 
             request.onsuccess = function (event) {
-                console.log('get complete')
+                console.log('get complete', event.target.result)
                 document.getElementById('display').innerHTML = JSON.stringify(request.result)
             }
 
             request.onerror = function (err) {
                 console.error('get error', err)
             }
+        }
+
+        function updateDBData() {
+            const id = parseFloat(document.getElementById('updateID').value)
+            const transaction = db.transaction(['users'], 'readwrite')
+            const objectStore = transaction.objectStore('users')
+            const request = objectStore.get(id)
+
+            request.onsuccess = function (event) {
+                const d = event.target.result
+                d.name = 'name name'
+                const objectStoreUpdate = objectStore.put(d)
+                objectStoreUpdate.onsuccess = function (e) {
+                    console.log('update success')
+                }
+                
+                document.getElementById('display').innerHTML = 'update success'
+            }
+
+            request.onerror = function (err) {
+                console.error('get error', err)
+            }
+             
         }
 
         function delDBData() {
@@ -165,8 +192,6 @@
                 console.log('delete complete', id);
             }
         }
-
-
     </script>
 
 </body>
