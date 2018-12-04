@@ -5,18 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable =no,viewport-fit=cover,maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="format-detection" content="telephone=no">
-    <!-- <link rel="stylesheet" href="./css/index.css?date=201812030947"> -->
-    <!-- <script src="./js/zepto.min.js"></script> -->
-    <title>开门红</title>
+    <link rel="stylesheet" href="./css/index.css?date=201812030947">
+    <script src="./js/zepto.min.js"></script>
+    <title>“凯”门大吉抢壕礼</title>
 </head>
 <body>
-    <div class="main">
-        <div class="loading">loading</div>
+    <div class="loading">
 
-        <div class="lose-page"></div>
-        <img src="./1.jpg" alt="">
+        <div>loading...</div>
+    </div>
+
+    <div id="main">
+        <div id="transitionPage">文案是</div>
+
+        <div id="drawLottery">
+            <div id="openWeChatService">去开通“微信提醒服务”，抽中的现金红包自动发放哦~</div>
+
+            <div class="display-prize">
+                <img class="d-p-img" src="./img/1.jpg" alt="no">
+                <div class="d-p-notice"></div>
+            </div>
+
+            <div class="draw-action">
+                <div class="d-a-cover">
+                    <h2>抽奖倒计时</h2>
+                    <div id="countDown" class="d-a-time"></div>
+                    <p>100%中奖，iphone xs/ipad、现金红包、海尔扫地机器人，多种礼品等你拿，记得来哦~</p>
+                </div>
+                <div>
+                    <h2>您还有0次抽奖机会</h2>
+                    <div>打开下面任意一扇门抽奖</div>
+                    <ul class="d-a-options" id="daOptions">
+                        <li data="1"><img src="./img/3.jpg" alt="no"></li>
+                        <li data="2"><img src="./img/3.jpg" alt="no"></li>
+                        <li data="3"><img src="./img/3.jpg" alt="no"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="check-my-prize">
+            <button id="checkMyPrize">查看我的奖品</button>
+        </div>
+
+        <!-- 中奖快报 -->
+        <div>
+            <div class="roll-box">
+                <ul id="roll">
+                </ul>
+            </div>
+        </div>
+
+        <!-- 活动规则 -->
+        <div class="activity-rules">
+            <h1>活动规则</h1>
+        </div>
     </div>
     
-    <!-- <script src="./js/index.js?date=201812030947"></script> -->
+    <script src="./js/index.js?date=201812030947"></script>
 </body>
 </html>
