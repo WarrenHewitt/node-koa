@@ -8,7 +8,46 @@
         // setActivityOffline()
         // setDisplayPrizeNotice(1)
         // setEventListen()
-    }, 0);
+        handleLoading(false)
+
+        handleTransitionPage()
+
+    }, 1000);
+
+    function setEventListen() {
+        $('#daOptions li').on('click', function(e) {
+            console.log($(this).attr('data'))
+        })
+
+        /**
+         * @desc 阻止loading遮罩被点击，传递事件
+         */
+        var loadingEle = document.getElementById('loading')
+        loadingEle.addEventListener('click', function (e) { e.stopPropagation()}, false)
+        loadingEle.addEventListener('touchmove', (e) => { e.preventDefault(); }, false)
+    }
+
+    /**
+     * @param { Boolean } showOrHide true表示显示 loading
+     * @param { Number } n 1表示显示白色背景，2表示背景透明 
+     */
+    function handleLoading(showOrHide, n) {
+        if (showOrHide) {
+            var bgc = n === 1 ? '#fff' : 'transparent'; 
+            $('.loading').attr('style', 'background-color:' + bgc).show();
+        } else {
+            $('.loading').hide()
+        }
+    }
+
+    function handleTransitionPage() {
+        $('#transitionAction').show(0, function() {
+            var context = this
+            setTimeout(function () {
+                $(context).fadeOut(1200)
+            }, 2000)
+        })
+    }
     
     function setActivityOffline() {
         $('#main').html('<div class="activity-offline"><div><img src="./img/2.jpg" alt=" "></div><p >活动已经结束啦~</p></div>');
@@ -85,12 +124,6 @@
         } else {
             console.log(ulObj.offsetHeight);
         }
-    }
-    
-    function setEventListen() {
-        $('#daOptions li').on('click', function(e) {
-            console.log($(this).attr('data'))
-        })
     }
 
     function setCountDown(ms) {

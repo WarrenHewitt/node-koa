@@ -1,4 +1,12 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -21,19 +29,29 @@ const api = __importStar(require("./controllers/api"));
 const file = __importStar(require("./controllers/file"));
 const app = new koa_1.default();
 const router = new koa_router_1.default();
-app.use(koa_static_1.default(path_1.default.join(__dirname + '/public/kmh')))
+app
+    .use((ctx, next) => __awaiter(this, void 0, void 0, function* () {
+    console.log(ctx.request.header.origin);
+    ctx.set("Access-Control-Allow-Origin", ctx.request.header.origin);
+    yield next();
+}))
+    .use(koa_static_1.default(path_1.default.join(__dirname + '/views/kmh')))
     .use(router.routes());
 router.get('/', (ctx) => {
     ctx.response.body = 'hello koa-typescript';
 });
-router.get('/api/names/', api.getNames);
-router.get('/api/table-list/', api.getTableList);
 /**
  * @desc 以下两个接口用于单页面路由与indexedDB
  */
 router.get('/page/:path', file.renderSPA);
 router.get('/html/:htmlFileName', file.renderHtml);
 router.get('/kmh', file.kmh);
+/**
+ * @desc 以下为 vue-admin 的 api 接口
+ */
+router.get('/api/names/', api.getNames);
+router.get('/api/table-list/', api.getTableList);
+router.post('api/upload', file.kmh);
 app.listen(2500, () => {
     console.log('listen on port: 2500');
 });

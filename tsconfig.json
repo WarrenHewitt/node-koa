@@ -6,16 +6,16 @@
         "noImplicitAny": true,
         "moduleResolution": "node",
         "sourceMap": true,
-        "outDir": "dist",
+        "outDir": "server",
         "baseUrl": ".",
         "paths": {
             "*": [
-                "node_modules/*",
-                "src/types/*"
+                "app/*",
+                "node_modules/*"
             ]
         }
     },
     "include": [
-        "src/**/*"
+        "app/**/*"
     ]
 }

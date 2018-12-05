@@ -2,20 +2,26 @@ import fs from 'fs'
 import path from 'path'
 
 export function kmh(ctx: any, next: Function) {
-    ctx.response.type = 'html';
-    ctx.response.body = fs.createReadStream('./dist/public/kmh/index.html');
+    // ctx.response.type = 'html';
+    // ctx.response.body = fs.createReadStream('./server/views/kmh/index.html');
 
-    return next();
+    // return next();
 }
 
+/**
+ * @desc 单页面路由实现
+ */
 export function renderSPA(ctx: any, next: Function) {
     // console.log('/:path', ctx.params.path);
     ctx.response.type = 'html';
-    ctx.response.body = fs.createReadStream('./dist/public/files/singlePageRoute.html');
+    ctx.response.body = fs.createReadStream('./server/views/html/singlePageRoute.html');
 
     return next();
 }
 
+/**
+ * @desc 根据获取的参数渲染 views/html 中的 html 文件
+ */
 export function renderHtml(ctx: any, next: Function) {
     const pages = ['indexedDB']
     let name = ctx.params.htmlFileName 
@@ -23,12 +29,12 @@ export function renderHtml(ctx: any, next: Function) {
     name = pages.indexOf(name) > -1 ? name : pages[0]
 
     ctx.response.type = 'html';
-    ctx.response.body = fs.createReadStream(`./dist/public/files/${name}.html`);
+    ctx.response.body = fs.createReadStream(`./server/views/html/${name}.html`);
 
     return next();
 }
 
-// save img by base64
+// 保存通过base64 方式传过来的图片
 export const upBase64 = (ctx: any) => {
     const data = ctx.request.body;
     const base64 = data.data;
@@ -41,7 +47,7 @@ export const upBase64 = (ctx: any) => {
     ctx.body = 'ok'
 }
 
-// save img by formData
+// 保存通过formData 方式传过来的图片
 export const upFormData = (ctx: any) =>  {
     const data = ctx.request.body.files.data;
     const savePath = path.join(`./files`, data.name)

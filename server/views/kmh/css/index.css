@@ -1,5 +1,5 @@
 body{ margin: 0; user-select:none; } ul { padding: 0; } li{ list-style-type: none; } h1,h2{ margin: 0; }
-i,em,a{ font-style: normal; } p{ margin: 0; } button,input,textarea{ outline: none } *{-webkit-tap-highlight-color: transparent;}  
+i,em,a{ font-style: normal; } p{ margin: 0; } button{ outline: none } *{-webkit-tap-highlight-color: transparent;}  
 
 .roll-box { height: 100px; background: #007acc; overflow: hidden; color: #fff; }
 #roll li { height: 25px; border-bottom: 1px solid #ddd }
@@ -11,11 +11,50 @@ i,em,a{ font-style: normal; } p{ margin: 0; } button,input,textarea{ outline: no
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: red; 
+    background-color: #fff; 
 }
 .loading div {
-    
+    margin: 30% auto 0;
+    height: 60px;
+    width: 60px;
+    text-align: center;
+    border-radius: 4px;
+    background-color: rgba(0,0,0,.7);
 }
+.loading div::after {
+    content: '';
+    display: inline-block;
+    margin-top: 12px;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    border: solid 3px transparent;
+    border-top-color: rgb(228, 228, 228);
+    border-left-color: rgb(228, 228, 228);
+    border-bottom-color: rgb(228, 228, 228);
+    animation: loadingAnimate .8s infinite linear;
+    -webkit-animation: loadingAnimate .8s infinite linear;
+}
+@keyframes loadingAnimate {
+    from { -webkit-transform: rotate(0deg);transform: rotate(0deg) }
+    to { -webkit-transform: rotate(360deg);transform: rotate(360deg) }
+}
+
+.transition-action {
+    z-index: 90;
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: orange;
+    /* animation: transitionAction 1s 2s;
+    -webkit-animation: transitionAction 1s 2s; */
+}
+/* @keyframes transitionAction {
+    from { opacity: 1 }
+    to { opacity: 0 }
+} */
 
 #losePage {
     text-align: center

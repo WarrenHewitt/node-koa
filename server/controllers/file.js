@@ -6,28 +6,34 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 function kmh(ctx, next) {
-    ctx.response.type = 'html';
-    ctx.response.body = fs_1.default.createReadStream('./dist/public/kmh/index.html');
-    return next();
+    // ctx.response.type = 'html';
+    // ctx.response.body = fs.createReadStream('./server/views/kmh/index.html');
+    // return next();
 }
 exports.kmh = kmh;
+/**
+ * @desc 单页面路由实现
+ */
 function renderSPA(ctx, next) {
     // console.log('/:path', ctx.params.path);
     ctx.response.type = 'html';
-    ctx.response.body = fs_1.default.createReadStream('./dist/public/files/singlePageRoute.html');
+    ctx.response.body = fs_1.default.createReadStream('./server/views/html/singlePageRoute.html');
     return next();
 }
 exports.renderSPA = renderSPA;
+/**
+ * @desc 根据获取的参数渲染 views/html 中的 html 文件
+ */
 function renderHtml(ctx, next) {
     const pages = ['indexedDB'];
     let name = ctx.params.htmlFileName;
     name = pages.indexOf(name) > -1 ? name : pages[0];
     ctx.response.type = 'html';
-    ctx.response.body = fs_1.default.createReadStream(`./dist/public/files/${name}.html`);
+    ctx.response.body = fs_1.default.createReadStream(`./server/views/html/${name}.html`);
     return next();
 }
 exports.renderHtml = renderHtml;
-// save img by base64
+// 保存通过base64 方式传过来的图片
 exports.upBase64 = (ctx) => {
     const data = ctx.request.body;
     const base64 = data.data;
@@ -39,7 +45,7 @@ exports.upBase64 = (ctx) => {
     });
     ctx.body = 'ok';
 };
-// save img by formData
+// 保存通过formData 方式传过来的图片
 exports.upFormData = (ctx) => {
     const data = ctx.request.body.files.data;
     const savePath = path_1.default.join(`./files`, data.name);
