@@ -55,4 +55,19 @@ exports.upFormData = (ctx) => {
     console.log(reader.pipe(writer));
     ctx.body = 'http://localhost:1112/' + data.name;
 };
+/**
+ * @desc 接收上传的excel等文件
+ */
+exports.uploadFile = (ctx, next) => {
+    console.log(ctx.request.body);
+    // const data = ctx.request.body.file.data;
+    // const savePath = path.join(`./`, data.name)
+    // const reader = fs.createReadStream(data.path)
+    // const writer = fs.createWriteStream(savePath)
+    // // ctx.body = 'http://localhost:1112/' + data.name
+    // console.log(reader.pipe(writer), savePath)
+    // ctx.body = 'http://localhost:1112/' + data.name 
+    ctx.body = 'http://localhost:1112/';
+    next();
+};
 //# sourceMappingURL=file.js.map

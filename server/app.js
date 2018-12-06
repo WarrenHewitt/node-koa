@@ -22,6 +22,8 @@ const path_1 = __importDefault(require("path"));
 const koa_1 = __importDefault(require("koa"));
 const koa_router_1 = __importDefault(require("koa-router"));
 const koa_static_1 = __importDefault(require("koa-static"));
+const koa_views_1 = __importDefault(require("koa-views"));
+const koa_bodyparser_1 = __importDefault(require("koa-bodyparser"));
 /**
  * @description 当没有默认导出时要用 * 防止报错
  */
@@ -30,11 +32,8 @@ const file = __importStar(require("./controllers/file"));
 const app = new koa_1.default();
 const router = new koa_router_1.default();
 app
-    .use((ctx, next) => __awaiter(this, void 0, void 0, function* () {
-    console.log(ctx.request.header.origin);
-    ctx.set("Access-Control-Allow-Origin", ctx.request.header.origin);
-    yield next();
-}))
+    .use(koa_bodyparser_1.default())
+    .use(koa_views_1.default(path_1.default.join(__dirname + '/views/pug'), { extension: 'pug' }))
     .use(koa_static_1.default(path_1.default.join(__dirname + '/views/kmh')))
     .use(router.routes());
 router.get('/', (ctx) => {
@@ -45,13 +44,20 @@ router.get('/', (ctx) => {
  */
 router.get('/page/:path', file.renderSPA);
 router.get('/html/:htmlFileName', file.renderHtml);
+/**
+ * @desc 渲染pug页面
+ */
+router.get('/pug', (ctx) => __awaiter(this, void 0, void 0, function* () {
+    yield ctx.render('test');
+}));
 router.get('/kmh', file.kmh);
 /**
  * @desc 以下为 vue-admin 的 api 接口
  */
 router.get('/api/names/', api.getNames);
 router.get('/api/table-list/', api.getTableList);
-router.post('api/upload', file.kmh);
+router.post('/api/upload/', file.uploadFile);
+app.on('error', err => console.error(`Unhandled exception occured. message: ${err.message}`));
 app.listen(2500, () => {
     console.log('listen on port: 2500');
 });

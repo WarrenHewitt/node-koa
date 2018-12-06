@@ -2,6 +2,8 @@ import path from 'path'
 import Koa from 'koa'
 import Router from 'koa-router'
 import koaStatic from 'koa-static'
+import views from 'koa-views'
+import bodyParser from 'koa-bodyparser'
 
 /**
  * @description 当没有默认导出时要用 * 防止报错
@@ -13,11 +15,8 @@ const app = new Koa()
 const router = new Router()
 
 app
-    .use(async (ctx, next) => {
-        console.log(ctx.request.header.origin);
-        ctx.set("Access-Control-Allow-Origin", ctx.request.header.origin)
-        await next()
-    })
+    .use(bodyParser())
+    .use(views(path.join(__dirname + '/views/pug'), { extension: 'pug' }))
     .use(koaStatic(path.join(__dirname + '/views/kmh')))
     .use(router.routes())
 
@@ -32,6 +31,13 @@ router.get('/', (ctx: any) => {
 router.get('/page/:path', file.renderSPA)
 router.get('/html/:htmlFileName', file.renderHtml)
 
+/**
+ * @desc 渲染pug页面
+ */
+router.get('/pug', async (ctx: any) => {
+    await ctx.render('test')
+})
+
 router.get('/kmh', file.kmh)
 
 
@@ -41,7 +47,9 @@ router.get('/kmh', file.kmh)
 router.get('/api/names/', api.getNames)
 router.get('/api/table-list/', api.getTableList)
 
-router.post('api/upload', file.kmh)
+router.post('/api/upload/', file.uploadFile) 
+
+app.on('error', err => console.error(`Unhandled exception occured. message: ${err.message}`));
 
 app.listen(2500, () => {
     console.log('listen on port: 2500');

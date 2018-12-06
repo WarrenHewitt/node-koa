@@ -18,7 +18,7 @@ const app = new Koa();
 const router = new Router();
 
 // resolve upload data problem
-const koaBody = require('koa-body')
+const koaBody = require('koa-bodyparser')
 
 // template
 const views = require('koa-views')

@@ -3,7 +3,7 @@ export function getNames(ctx: any) {
     ctx.response.body = ['a', 'b', 'c']
 }
 
-export function getTableList(ctx: any) {
+export function getTableList(ctx: any, next: Function) {
     ctx.response.body = {
         code: 1,
         data: [{
@@ -14,4 +14,6 @@ export function getTableList(ctx: any) {
         }],
         msg: '成功'
     }
+
+    next()
 }

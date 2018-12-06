@@ -5,7 +5,7 @@ function getNames(ctx) {
     ctx.response.body = ['a', 'b', 'c'];
 }
 exports.getNames = getNames;
-function getTableList(ctx) {
+function getTableList(ctx, next) {
     ctx.response.body = {
         code: 1,
         data: [{
@@ -16,6 +16,7 @@ function getTableList(ctx) {
             }],
         msg: '成功'
     };
+    next();
 }
 exports.getTableList = getTableList;
 //# sourceMappingURL=api.js.map
