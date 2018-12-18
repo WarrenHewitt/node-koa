@@ -1,5 +1,5 @@
 export function getNames(ctx: any) {
-    console.log(ctx.request.query);
+    // console.log(ctx.request.query);
     ctx.response.body = ['a', 'b', 'c']
 }
 

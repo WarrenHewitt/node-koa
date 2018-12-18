@@ -1,0 +1,344 @@
+#myPrise {
+    display: none;
+}
+#surprise {
+    display: none;
+}
+.wmask {
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 100;
+}
+.wmask.holy-light {
+    background-image: url("../img/popup/holy-light.png");
+    background-position: center 0%;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+/*我的奖品部分 - start */
+.popup-wrapper {
+    /*position: absolute;*/
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%) !important;
+    transform: translate(-50%, -50%) !important;
+    width: 300px;
+    background-color: #FDF1DB;
+    border-radius: 14px;
+    /*min-height: 295px;*/
+    z-index: 101;
+}
+.popup-btn__close {
+    width: 34px;
+    height: 34px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -50px;
+    left: 133px;
+    background: url("../img/popup/close.png") no-repeat;
+    background-size: cover;
+}
+
+.popup-title {
+    font-size: 18px;
+    font-weight: 500;
+    color: #DBAF5F;
+    text-align: center;
+    margin: 18px 0 17px;
+    letter-spacing: 2px;
+}
+.popup-content {
+    position: relative;
+    height: 100px;
+    margin: 0 22px;
+    border: 1px solid #FFBC4E;
+}
+.popup-content__title {
+    margin-top: 22px;
+    margin-bottom: 16px;
+    font-size: 15px;
+    font-weight: 400;
+    color: #574C25;
+    text-align: center;
+}
+.popup-content__detail {
+    font-size: 18px;
+    font-weight: bold;
+    color: #EC5745;
+    text-align: center;
+}
+.popup-extra {
+    margin: 15px 22px 0;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    background: #EEE0C8;
+    border-radius: 5px;
+    color: #999482;
+    letter-spacing: 1px;
+}
+.content-color__red {
+    color: #EC5745;
+}
+.popup-tips {
+    margin: 14px 22px 20px;
+    /*padding: 0 22px;*/
+    color: #9A8D5E;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 1px;
+}
+.tips-color {
+    text-decoration: underline;
+    color: #574C25;
+}
+
+
+/*我的奖品部分 - end */
+
+/*抽奖弹窗 - start*/
+/*.surprise-wrapper {*/
+    /*!*position: absolute;*!*/
+    /*position: fixed;*/
+    /*min-height: 295px;*/
+    /*width: 100%;*/
+    /*top: 50%;*/
+    /*left: 50%;*/
+    /*-webkit-transform: translate(-50%, -50%) !important;*/
+    /*transform: translate(-50%, -50%) !important;*/
+    /*z-index: 101;*/
+/*}*/
+
+.surprise-wrapper {
+    position: fixed;
+    width: 300px;
+    background-color: #FDF1DB;
+    border-radius: 14px;
+    min-height: 295px;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%) !important;
+    transform: translate(-50%, -50%) !important;
+    z-index: 101;
+}
+.icon-wrapper {
+    position: absolute;
+    margin-top: -125px;
+    margin-left: 30px;
+    width: 235px;
+    height: 200px;
+    background: url("../img/popup/fire-flower.png") no-repeat;
+    background-size: cover;
+}
+.price-img {
+    position: absolute;
+    top: 37px;
+    width: 160px;
+    height: 160px;
+    margin-left: 40px;
+    background-image: url("../img/popup/iPhone.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.price-img.prize1 {
+    background-image: url("../img/popup/iPhone.png");
+}
+.price-img.prize2 {
+    background-image: url("../img/popup/cleaner.png");
+}
+.price-img.prize3 {
+    background-image: url("../img/popup/bbq.png");
+}
+.price-img.prize4 {
+    background-image: url("../img/popup/jdcard.png");
+}
+.price-img.prize5 {
+    background-image: url("../img/popup/redpacket.png");
+}
+/*.holy-light {*/
+    /*position: absolute;*/
+    /*width: 100%;*/
+    /*top: -100px;*/
+    /*height: 295px;*/
+    /*background: url(../img/popup/holy-light.png) center no-repeat;*/
+    /*background-size: contain;*/
+    /*z-index: 102;*/
+/*}*/
+.surprise-title {
+    margin: 68px 0 10px;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    color: #EC5745;
+    letter-spacing: 1px;
+}
+.surprise-title__sub {
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+    color: #EC5745;
+    letter-spacing: 1px;
+}
+.surprise-prise {
+    margin: 14px 0 12px;
+    font-size: 18px;
+    font-weight:400;
+    color: #574C25;
+    text-align: center;
+}
+.surprise-btns__wrapper {
+    margin: 0 20px;
+}
+.surprise-btn {
+    display: inline-block;
+    box-sizing: border-box;
+    width: 120px;
+    height: 40px;
+    margin-bottom: 15px;
+    font-size: 15px;
+    line-height: 40px;
+    border: 1px solid #EC5745;
+    border-radius: 5px;
+    text-align: center;
+    letter-spacing: 1px;
+}
+.surprise-btn__cancel {
+    color: #EC5745;
+    font-weight: 500;
+}
+.surprise-btn__confirm {
+    float: right;
+    background: #EC5745;
+    color: #FFDF3B;
+}
+.surprise-tips {
+    margin-bottom: 30px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #9A8D5E;
+    text-align: center;
+}
+/*--微信是否关注逻辑判断部分--*/
+.surprise-redpacket__is_focused {
+    display: block;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
+.surprise-redpacket__tips_time {
+    margin-bottom: 12px;
+    color: #EC5745;
+    font-size: 12px;
+    text-align: center;
+}
+.surprise-redpacket__tips_wechat {
+    margin: 0 20px 10px;
+    padding: 10px 0;
+    background: #EEE0C8;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #999482;
+    text-align: center;
+}
+.surprise-redpacket__tips_wechat_info {
+    height: 20px;
+    line-height: 20px;
+}
+.surprise-redpacket__tips_wechat_opera {
+    color: #999482;
+    font-size: 12px;
+}
+.surprise-redpacket__tips_wechat_opera span {
+    text-decoration: underline;
+    color: #574C25;
+}
+.surprise-redpacket__tips_avatar {
+    width: 19px;
+    height: 19px;
+    vertical-align: middle;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+}
+
+/*抽奖弹窗 - end*/
+/*common-角落的装饰*/
+.corner-decoration {
+    position: relative;
+}
+.corner-decoration i {
+    position: absolute;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background: url("../img/popup/corner.png") no-repeat;
+    background-size: cover;
+    z-index: -1;
+}
+.corner-decoration i:nth-of-type(1) {
+    left: -3px;
+    top: -3px;
+}
+.corner-decoration i:nth-of-type(2) {
+    right: -3px;
+    top: -3px;
+    transform: rotate(90deg);
+}
+.corner-decoration i:nth-of-type(3) {
+    right: -3px;
+    bottom: -3px;
+    transform: rotate(180deg);
+}
+.corner-decoration i:nth-of-type(4) {
+    left: -3px;
+    bottom: -3px;
+    transform: rotate(270deg);
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale3d(0.3, 0.3, 0.3);
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+.zoomIn {
+    animation-name: zoomIn;
+}
+
+@keyframes zoomOut {
+    from {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+        transform: scale3d(0.3, 0.3, 0.3);
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+.zoomOut {
+    animation-name: zoomOut;
+}
+
+.animated {
+    animation-fill-mode: both;
+    animation-duration: 250ms;
+}

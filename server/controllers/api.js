@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function getNames(ctx) {
-    console.log(ctx.request.query);
+    // console.log(ctx.request.query);
     ctx.response.body = ['a', 'b', 'c'];
 }
 exports.getNames = getNames;

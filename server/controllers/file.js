@@ -59,7 +59,7 @@ exports.upFormData = (ctx) => {
  * @desc 接收上传的excel等文件
  */
 exports.uploadFile = (ctx, next) => {
-    console.log(ctx.request.body);
+    console.log(ctx);
     // const data = ctx.request.body.file.data;
     // const savePath = path.join(`./`, data.name)
     // const reader = fs.createReadStream(data.path)
