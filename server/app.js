@@ -24,6 +24,7 @@ const koa_router_1 = __importDefault(require("koa-router"));
 const koa_static_1 = __importDefault(require("koa-static"));
 const koa_views_1 = __importDefault(require("koa-views"));
 const koa_bodyparser_1 = __importDefault(require("koa-bodyparser"));
+const koa_multer_1 = __importDefault(require("koa-multer"));
 /**
  * @description 当没有默认导出时要用 * 防止报错
  */
@@ -31,6 +32,7 @@ const api = __importStar(require("./controllers/api"));
 const file = __importStar(require("./controllers/file"));
 const app = new koa_1.default();
 const router = new koa_router_1.default();
+const upload = koa_multer_1.default({ dest: path_1.default.join(__dirname + '/uploadFiles/') });
 app
     .use(koa_bodyparser_1.default())
     .use(koa_views_1.default(path_1.default.join(__dirname + '/views/pug'), { extension: 'pug' }))
@@ -56,7 +58,7 @@ router.get('/kmh', file.kmh);
  */
 router.get('/api/names/', api.getNames);
 router.get('/api/table-list/', api.getTableList);
-router.post('/api/upload/', file.uploadFile);
+router.post('/api/upload/', upload.single('file'), file.uploadFile);
 app.on('error', err => console.error(`Unhandled exception occured. message: ${err.message}`));
 app.listen(2500, () => {
     console.log('listen on port: 2500');

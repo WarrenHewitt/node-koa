@@ -1,8 +1,7 @@
-body{ margin: 0; user-select:none; } ul { padding: 0; } li{ list-style-type: none; } h1,h2{ margin: 0; }
+html{ background-color: #cc3300;}
+body{ font-family:  'PingFang SC', 'Helvetica Neue', NotoSansSC, Roboto, 'sans-serif';-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;margin: 0; user-select:none; }
+ul { padding: 0; } li{ list-style-type: none; } h1,h2{ margin: 0; }
 i,em,a{ font-style: normal; } p{ margin: 0; } button{ outline: none } *{-webkit-tap-highlight-color: transparent;}  
-
-.roll-box { height: 100px; background: #007acc; overflow: hidden; color: #fff; }
-#roll li { height: 25px; border-bottom: 1px solid #ddd }
 
 .loading { 
     z-index: 100;
@@ -40,107 +39,169 @@ i,em,a{ font-style: normal; } p{ margin: 0; } button{ outline: none } *{-webkit-
     to { -webkit-transform: rotate(360deg);transform: rotate(360deg) }
 }
 
-.transition-action {
-    z-index: 90;
-    position: fixed; 
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: orange;
-    /* animation: transitionAction 1s 2s;
-    -webkit-animation: transitionAction 1s 2s; */
-}
-/* @keyframes transitionAction {
-    from { opacity: 1 }
-    to { opacity: 0 }
-} */
+
 
 #losePage {
     text-align: center
 }
 
-.activity-offline div {
-    margin: 10% 0;
-    min-height: 200px;
-    text-align: center;
-}
-.activity-offline img {
-    width: 80%;
-}
-.activity-offline p {
-    margin: 20px 0;
-    text-align: center;
-}
-
-#transitionPage{
-    display: none;
-    z-index: 5;
+.activity-offline {
     position: fixed;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
-    opacity: 1;
-    -webkit-transition: opacity 1s;  
+    background: url(../img/activityOffline.jpg) no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.activity-offline div {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.5);
+}
+.activity-offline p {
+    margin: 30.43% auto 0;
+    width: 180px;
+    height: 54px;
+    line-height: 54px;
+    opacity:0.7;
+    text-align: center;
+    border-radius:14px;
+    font-weight: 600;
+    color:rgba(188,180,153,1);
+    background-color: #000;
 }
 
 #openWeChatService{
+    position: relative;
     display: none;
+    height: 44px;
+    line-height: 44px;
+    padding-left: 15px;
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: #E33239;
+    background:rgb(253,241,219);
+}
+#openWeChatService::after {
+    content: ">";
+    position: absolute;
+    top: 0;
+    right: 15px;
+    font-size: 16px;
+    color: #999;
 }
 
-#drawLottery{
+#drawLottery{ 
     /* opacity: 0; */
     -webkit-transition: opacity 0 1s;  
 }
 
+
+/* 顶部展示奖品区域 */
 .display-prize{
     position: relative;
+    font-size: 0;
 }
 .d-p-img{
     width: 100%
 }
-.d-p-notice{
-    position: absolute;
-    width: 100%;
-    top: 10px;
-    text-align: center;
-}
 .d-p-prize-end{
-    background-color: orange;
+    position: absolute;
+    width: 235px;
+    height: 126px;
+    top: 60px;
+    left: 50%;
+    margin-left: -118px;
+    border-radius:14px;
+    background:rgba(0,0,0,.5);
+}
+.d-p-prize-end h2 {
+    margin-top: 30px;
+    font-size:18px;
+    text-align: center;
+    font-family:PingFangSC-Medium;
+    font-weight:600;
+    color:rgb(255,208,98);
+    text-shadow:0px 0px 4px rgba(73,11,2,0.72);
+}
+.d-p-prize-end p {
+    margin:16px auto 0; 
+    width:162px;
+    height:33px;
+    font-size:14px;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    color:rgba(255,241,196,1);
+    text-align: center;
+    line-height:20px;
+    text-shadow:0px 0px 4px rgba(73,11,2,0.72);
+}
+
+.d-p-people {
+    position: absolute;
+    width:210px;
+    height:28px;
+    line-height: 28px;
+    top: 18px;
+    left: 50%;
+    margin-left: -105px;
+    background:rgba(255,220,29,0.9);
+    box-shadow:0px 3px 8px 1px rgba(169,4,14,0.53);
+    border-radius:14px;
+    font-size:12px;
+    font-family:PingFangSC-Regular;
+    font-weight:500;
+    color:rgba(208,0,10,1);
+    text-align: center;
 }
 
 .check-my-prize{
-    display: none
-}
-
-.draw-action {
-    position: relative;
+    display: none;
+    margin: 8px auto;
     text-align: center;
 }
-.d-a-cover p{
-    color: orange;
+.check-my-prize button{
+    width: 154px;
+    height: 35px;
+    background: url(../img/myPriseBtn.png) no-repeat;
+    background-position: center;
+    background-size: cover;
+    border: 0;
 }
-.d-a-cover{
-    display: none;
-    z-index: 1px;
-    position: absolute;
+
+
+/* 抽奖区样式 */
+.draw-action {
+    position: relative;
+    margin-top: -10px;
+}
+.scroll-top{
+    position: relative;
+}
+.scroll-top,.scroll-bottom {
+    margin: 0 6px;
+    height: 27px;
+    background-color: #CB2E2B;
+}
+.scroll-top img, .scroll-bottom img{
     width: 100%;
-    height: 100%;
+}
+.scroll-top h2 {
+    position: absolute;
     top: 0;
     left: 0;
-    background-color: rgba(225, 225, 225, 0.9);
+    width: 100%;
+    height: 27px;
+    line-height: 27px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 1px;
+    color: #FFD062;
 }
-.d-a-time{
-    height: 30px;
-    line-height: 30px
-}
-.d-a-options{
-    display: flex;
-    background-color: yellow;
-}
-.d-a-options li{
-    margin: 5px;
-    flex-grow: 1;
-    background-color: pink;
+.scroll-top h2 span{
+    padding: 0 3px;
+    color: #fff
 }

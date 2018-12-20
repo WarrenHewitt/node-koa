@@ -4,6 +4,7 @@ import Router from 'koa-router'
 import koaStatic from 'koa-static'
 import views from 'koa-views'
 import bodyParser from 'koa-bodyparser'
+import multer from 'koa-multer'
 
 /**
  * @description 当没有默认导出时要用 * 防止报错
@@ -13,6 +14,8 @@ import * as file from './controllers/file'
 
 const app = new Koa()
 const router = new Router()
+
+const upload = multer({ dest: path.join(__dirname + '/uploadFiles/') })
 
 app
     .use(bodyParser())
@@ -47,7 +50,7 @@ router.get('/kmh', file.kmh)
 router.get('/api/names/', api.getNames)
 router.get('/api/table-list/', api.getTableList)
 
-router.post('/api/upload/', file.uploadFile) 
+router.post('/api/upload/', upload.single('file'), file.uploadFile) 
 
 app.on('error', err => console.error(`Unhandled exception occured. message: ${err.message}`));
 
