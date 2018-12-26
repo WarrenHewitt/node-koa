@@ -41,8 +41,6 @@ router.get('/pug', async (ctx: any) => {
     await ctx.render('test')
 })
 
-router.get('/kmh', file.kmh)
-
 
 /**
  * @desc 以下为 vue-admin 的 api 接口
