@@ -1,11 +1,12 @@
 const Koa = require('koa');
 const ask = require('apollo-server-koa');
-const ApolloServer = ask.ApolloServer; 
+const ApolloServer = ask.ApolloServer;    
 const gql = ask.gql;
 // Construct a schema, using GraphQL schema language
 const typeDefs = gql`
   type Query {
     hello: String
+    level: String
   }
 `;
 
@@ -13,6 +14,7 @@ const typeDefs = gql`
 const resolvers = {
   Query: {
     hello: () => 'Hello world!',
+    level: () => 'level'
   },
 };
 
