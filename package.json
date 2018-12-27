@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon server/app.js",
     "watch": "tsc -w ",
-    "graph": "nodemon graph.js",
+    "gql": "nodemon graphql/gql.js",
     "dev": "pm2 start app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
