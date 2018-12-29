@@ -23,7 +23,7 @@ const server = new ApolloServer({ typeDefs, resolvers });
 const app = new Koa();
 server.applyMiddleware({ app });
 
-const port = 3000;
+const port = 3001;
 const host = 'localhost';
 
 app.listen(port, host, () =>

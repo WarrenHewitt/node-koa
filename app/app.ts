@@ -31,13 +31,13 @@ router.get('/', (ctx: any) => {
 /**
  * @desc 以下两个接口用于单页面路由与indexedDB
  */
-router.get('/page/:path', file.renderSPA)
-router.get('/html/:htmlFileName', file.renderHtml)
+router.get('/page/:path/', file.renderSPA)
+router.get('/html/:htmlFileName/', file.renderHtml)
 
 /**
  * @desc 渲染pug页面
  */
-router.get('/pug', async (ctx: any) => {
+router.get('/pug/', async (ctx: any) => {
     await ctx.render('test')
 })
 
