@@ -9,19 +9,28 @@ const client = new MongoClient(url, {
     useNewUrlParser: true
 })
 
-client.connect(function (err) {
-    assert.equal(null, err)
-    console.log('connect success!');
+class MongoDB {
+    async findOne() {
+        try {
+            await client.connect()
+            console.log('connect success!')
+            
+            const db = client.db(databaseName)
 
-    const db = client.db(databaseName)
+            const col = db.collection('users')
+            
+            const r = await col.find({city: '成都'}).toArray()
+            console.log('find results:', r);
+        
+            client.close()
+            return r
+            
 
-    client.close()
-})
-
-const find = () => {
     
+        } catch (err) {
+            console.log('error', err)
+        }
+    }
 }
 
-module.exports =  function() {
-
-}
+module.exports = new MongoDB()
