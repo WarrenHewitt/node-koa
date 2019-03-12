@@ -5,12 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
-function kmh(ctx, next) {
-    // ctx.response.type = 'html';
-    // ctx.response.body = fs.createReadStream('./server/views/kmh/index.html');
-    // return next();
-}
-exports.kmh = kmh;
 /**
  * @desc 单页面路由实现
  */

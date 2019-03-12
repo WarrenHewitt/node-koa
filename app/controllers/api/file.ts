@@ -1,13 +1,6 @@
 import fs from 'fs'
 import path from 'path'
 
-export function kmh(ctx: any, next: Function) {
-    // ctx.response.type = 'html';
-    // ctx.response.body = fs.createReadStream('./server/views/kmh/index.html');
-
-    // return next();
-}
-
 /**
  * @desc 单页面路由实现
  */

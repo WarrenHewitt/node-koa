@@ -1,8 +1,17 @@
 import path from 'path'
 import Koa from 'koa'
 import Router from 'koa-router'
+
+// 静态文件服务 包含在根目录下的所有文件可通过链接直接访问
 import koaStatic from 'koa-static'
+
+/**
+ * @desc 支持多个模板pug ejs等 参考https://github.com/tj/consolidate.js 当选择了模板后还要安装该模板
+ * @desc 用在路由之前
+ */
 import views from 'koa-views'
+
+
 import bodyParser from 'koa-bodyparser'
 
 // 设置跨域中间件
@@ -14,15 +23,14 @@ const router = new Router()
 app
     .use(cors({
         origin: function(ctx) {
-            console.log(ctx.header.origin);
-            return 'http://localhost:3096'
+            return ctx.header.origin
         },
         // 当前端的 credentials 是true时，这里也必须是true
         credentials: true
     }))
-    .use(bodyParser())
     .use(views(path.join(__dirname + '/views/pug'), { extension: 'pug' }))
-    .use(koaStatic(path.join(__dirname + '/views/kmh')))
+    .use(koaStatic(path.join(__dirname + '/views/public')))
+    .use(bodyParser())
     .use(router.routes())
 
 router.get('/', (ctx: any) => {
@@ -33,7 +41,15 @@ router.get('/', (ctx: any) => {
  * @desc 渲染pug页面
  */
 router.get('/pug/', async (ctx: any) => {
-    await ctx.render('test')
+    /**
+     * @desc 因为render内部读取文件是异步的  所以render也是异步的，所以加await
+     */
+    await ctx.render('pug')
+    
+    /**
+     *  render前不加 await 就会返回如下同步操作内容
+     */
+    // ctx.response.body = '同步'
 })
 
 /**

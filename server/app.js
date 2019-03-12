@@ -14,7 +14,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const path_1 = __importDefault(require("path"));
 const koa_1 = __importDefault(require("koa"));
 const koa_router_1 = __importDefault(require("koa-router"));
+// 静态文件服务 包含在根目录下的所有文件可通过链接直接访问
 const koa_static_1 = __importDefault(require("koa-static"));
+/**
+ * @desc 支持多个模板pug ejs等 参考https://github.com/tj/consolidate.js 当选择了模板后还要安装该模板
+ * @desc 用在路由之前
+ */
 const koa_views_1 = __importDefault(require("koa-views"));
 const koa_bodyparser_1 = __importDefault(require("koa-bodyparser"));
 // 设置跨域中间件
@@ -24,15 +29,14 @@ const router = new koa_router_1.default();
 app
     .use(koa2_cors_1.default({
     origin: function (ctx) {
-        console.log(ctx.header.origin);
-        return 'http://localhost:3096';
+        return ctx.header.origin;
     },
     // 当前端的 credentials 是true时，这里也必须是true
     credentials: true
 }))
-    .use(koa_bodyparser_1.default())
     .use(koa_views_1.default(path_1.default.join(__dirname + '/views/pug'), { extension: 'pug' }))
-    .use(koa_static_1.default(path_1.default.join(__dirname + '/views/kmh')))
+    .use(koa_static_1.default(path_1.default.join(__dirname + '/views/public')))
+    .use(koa_bodyparser_1.default())
     .use(router.routes());
 router.get('/', (ctx) => {
     ctx.response.body = 'hello koa-typescript';
@@ -41,7 +45,14 @@ router.get('/', (ctx) => {
  * @desc 渲染pug页面
  */
 router.get('/pug/', (ctx) => __awaiter(this, void 0, void 0, function* () {
-    yield ctx.render('test');
+    /**
+     * @desc 因为render内部读取文件是异步的  所以render也是异步的，所以加await
+     */
+    yield ctx.render('pug');
+    /**
+     *  render前不加 await 就会返回如下同步操作内容
+     */
+    // ctx.response.body = '同步'
 }));
 /**
  * @desc 以下为 api 接口
