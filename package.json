@@ -4,8 +4,7 @@
   "description": "no",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server/app.js",
-    "watch": "tsc -w ",
+    "start": "node startServer.js",
     "gql": "nodemon graphql/gql.js",
     "dev": "pm2 start app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -22,6 +21,7 @@
     "@types/koa-router": "^7.0.32",
     "@types/koa-static": "^4.0.0",
     "@types/koa-views": "^2.0.3",
+    "@types/koa2-cors": "^2.0.1",
     "@types/node": "^10.9.4",
     "apollo-server-koa": "^2.3.1",
     "assert": "^1.4.1",
@@ -32,6 +32,7 @@
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
     "koa-views": "^6.1.4",
+    "koa2-cors": "^2.0.6",
     "mongodb": "^3.1.10",
     "typescript": "^3.0.3"
   },
