@@ -11,7 +11,9 @@ import koaStatic from 'koa-static'
  */
 import views from 'koa-views'
 
-
+/**
+ * @desc 支持json, form, text 类型的 body
+ */
 import bodyParser from 'koa-bodyparser'
 
 // 设置跨域中间件
@@ -58,7 +60,10 @@ router.get('/pug/', async (ctx: any) => {
 const adminApi = require('./controllers/api/index.js')
 adminApi.api(router)
 
-app.on('error', err => console.error(`Unhandled exception occured. message: ${err.message}`));
+/**
+ * 监听报错信息
+ */
+app.on('error', err => console.error(`error occured: ${err.message}`));
 
 const port = 2500
 app.listen(port, () => {

@@ -1,15 +1,29 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * @desc 文件处理相关操作
+ */
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
+const dayjs_1 = __importDefault(require("dayjs"));
 /**
  * @desc 单页面路由实现
  */
 function renderSPA(ctx, next) {
-    // console.log('/:path', ctx.params.path);
+    /**
+     * 路由中使用/:paramsName,可以用ctx.params.paramsName获取参数
+     */
     ctx.response.type = 'html';
     ctx.response.body = fs_1.default.createReadStream('./server/views/html/singlePageRoute.html');
     return next();
@@ -27,7 +41,9 @@ function renderHtml(ctx, next) {
     return next();
 }
 exports.renderHtml = renderHtml;
-// 保存通过base64 方式传过来的图片
+/**
+ * @desc 保存通过base64 方式传过来的图片
+ */
 exports.upBase64 = (ctx) => {
     const data = ctx.request.body;
     const base64 = data.data;
@@ -39,13 +55,14 @@ exports.upBase64 = (ctx) => {
     });
     ctx.body = 'ok';
 };
-// 保存通过formData 方式传过来的图片
+/**
+ * @desc 保存通过formData 方式传过来的图片
+ */
 exports.upFormData = (ctx) => {
     const data = ctx.request.body.files.data;
     const savePath = path_1.default.join(`./files`, data.name);
     const reader = fs_1.default.createReadStream(data.path);
     const writer = fs_1.default.createWriteStream(savePath);
-    // ctx.body = 'http://localhost:1112/' + data.name
     console.log(reader.pipe(writer));
     ctx.body = 'http://localhost:1112/' + data.name;
 };
@@ -64,4 +81,41 @@ exports.uploadFile = (ctx, next) => {
     ctx.body = 'http://localhost:1112/';
     next();
 };
+/**
+ * @desc 更新data/data.json文件中的数据
+ */
+exports.updateFileContent = (ctx, next) => __awaiter(this, void 0, void 0, function* () {
+    const { company, product, change } = ctx.request.body;
+    let database;
+    // interface  ReqData {
+    //     company: String; 
+    //     product: String; 
+    //     change: Number;
+    // }
+    const updateData = (data) => {
+        database = JSON.parse(data);
+        const item = database[company][product];
+        const oldTotal = item[item.length - 1] ? item[item.length - 1].total : 0;
+        database[company][product].push({
+            total: oldTotal + change,
+            change,
+            date: dayjs_1.default(Date()).format('YYYY-MM-DD HH:mm:ss')
+        });
+    };
+    yield fs_1.default.readFile(path_1.default.join('./server/data/data.json'), 'utf8', (err, data) => {
+        if (err)
+            throw err;
+        updateData(data);
+        console.log('read');
+    });
+    yield fs_1.default.writeFile(path_1.default.join('./server/data/data.json'), JSON.stringify(database), 'utf8', (err) => {
+        if (err)
+            throw err;
+        console.log('write');
+        ctx.response.body = 'niaho';
+    });
+    console.log('end');
+    // console.log(newData);
+    next();
+});
 //# sourceMappingURL=file.js.map

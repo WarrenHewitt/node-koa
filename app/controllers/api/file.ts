@@ -1,11 +1,18 @@
+/**
+ * @desc 文件处理相关操作
+ */
 import fs from 'fs'
 import path from 'path'
+import dayJs from 'dayjs'
+
 
 /**
  * @desc 单页面路由实现
  */
 export function renderSPA(ctx: any, next: Function) {
-    // console.log('/:path', ctx.params.path);
+    /**
+     * 路由中使用/:paramsName,可以用ctx.params.paramsName获取参数
+     */
     ctx.response.type = 'html';
     ctx.response.body = fs.createReadStream('./server/views/html/singlePageRoute.html');
 
@@ -27,7 +34,9 @@ export function renderHtml(ctx: any, next: Function) {
     return next();
 }
 
-// 保存通过base64 方式传过来的图片
+/**
+ * @desc 保存通过base64 方式传过来的图片
+ */
 export const upBase64 = (ctx: any) => {
     const data = ctx.request.body;
     const base64 = data.data;
@@ -40,14 +49,15 @@ export const upBase64 = (ctx: any) => {
     ctx.body = 'ok'
 }
 
-// 保存通过formData 方式传过来的图片
+/**
+ * @desc 保存通过formData 方式传过来的图片
+ */
 export const upFormData = (ctx: any) =>  {
     const data = ctx.request.body.files.data;
     const savePath = path.join(`./files`, data.name)
     const reader = fs.createReadStream(data.path)
     const writer = fs.createWriteStream(savePath)
 
-    // ctx.body = 'http://localhost:1112/' + data.name
     console.log(reader.pipe(writer))
     ctx.body = 'http://localhost:1112/' + data.name 
 }
@@ -69,4 +79,43 @@ export const uploadFile = (ctx: any, next: Function) =>  {
     next()
 }
 
+/**
+ * @desc 更新data/data.json文件中的数据
+ */
+export const updateFileContent = async(ctx: any, next: Function) =>  {
+    const { company, product, change } = ctx.request.body
+    let database
+    // interface  ReqData {
+    //     company: String; 
+    //     product: String; 
+    //     change: Number;
+    // }
+    const updateData = (data: string) => {
+        database = JSON.parse(data) 
+        const item = database[company][product]
+        const oldTotal = item[item.length -1] ? item[item.length -1].total : 0 
+        database[company][product].push({
+            total: oldTotal + change,
+            change,
+            date: dayJs(Date()).format('YYYY-MM-DD HH:mm:ss')
+        })
+    }
+
+    await fs.readFile(path.join('./server/data/data.json'), 'utf8', (err, data) => {
+        if(err) throw err
+        updateData(data)
+        console.log('read');
+        
+    })
+
+    await fs.writeFile(path.join('./server/data/data.json'),JSON.stringify(database), 'utf8', (err) => {
+        if (err) throw err;
+        console.log('write');
+        ctx.response.body = 'niaho'
+    }) 
+   
+    console.log('end');
+    // console.log(newData);
+    next()
+}
 

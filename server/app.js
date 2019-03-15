@@ -21,6 +21,9 @@ const koa_static_1 = __importDefault(require("koa-static"));
  * @desc 用在路由之前
  */
 const koa_views_1 = __importDefault(require("koa-views"));
+/**
+ * @desc 支持json, form, text 类型的 body
+ */
 const koa_bodyparser_1 = __importDefault(require("koa-bodyparser"));
 // 设置跨域中间件
 const koa2_cors_1 = __importDefault(require("koa2-cors"));
@@ -59,7 +62,10 @@ router.get('/pug/', (ctx) => __awaiter(this, void 0, void 0, function* () {
  */
 const adminApi = require('./controllers/api/index.js');
 adminApi.api(router);
-app.on('error', err => console.error(`Unhandled exception occured. message: ${err.message}`));
+/**
+ * 监听报错信息
+ */
+app.on('error', err => console.error(`error occured: ${err.message}`));
 const port = 2500;
 app.listen(port, () => {
     console.log(`listen on port: ${port}`);
