@@ -59,7 +59,7 @@ router.get('/pug/', async (ctx: any) => {
  */
 const adminApi = require('./controllers/api/index.js')
 adminApi.api(router)
-
+ 
 /**
  * 监听报错信息
  */

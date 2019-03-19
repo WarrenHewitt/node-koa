@@ -84,16 +84,10 @@ exports.uploadFile = (ctx, next) => {
 /**
  * @desc 更新data/data.json文件中的数据
  */
-exports.updateFileContent = (ctx, next) => __awaiter(this, void 0, void 0, function* () {
+exports.updateFileContent = (ctx) => __awaiter(this, void 0, void 0, function* () {
     const { company, product, change } = ctx.request.body;
-    let database;
-    // interface  ReqData {
-    //     company: String; 
-    //     product: String; 
-    //     change: Number;
-    // }
     const updateData = (data) => {
-        database = JSON.parse(data);
+        const database = JSON.parse(data);
         const item = database[company][product];
         const oldTotal = item[item.length - 1] ? item[item.length - 1].total : 0;
         database[company][product].push({
@@ -101,21 +95,19 @@ exports.updateFileContent = (ctx, next) => __awaiter(this, void 0, void 0, funct
             change,
             date: dayjs_1.default(Date()).format('YYYY-MM-DD HH:mm:ss')
         });
+        return JSON.stringify(database, null, 4);
     };
-    yield fs_1.default.readFile(path_1.default.join('./server/data/data.json'), 'utf8', (err, data) => {
-        if (err)
-            throw err;
-        updateData(data);
-        console.log('read');
-    });
-    yield fs_1.default.writeFile(path_1.default.join('./server/data/data.json'), JSON.stringify(database), 'utf8', (err) => {
-        if (err)
-            throw err;
-        console.log('write');
-        ctx.response.body = 'niaho';
-    });
-    console.log('end');
-    // console.log(newData);
-    next();
+    try {
+        /**
+         * 使用同步方法
+         */
+        const fileData = fs_1.default.readFileSync(path_1.default.join('./server/data/data.json'), 'utf8');
+        fs_1.default.writeFileSync(path_1.default.join('./server/data/data.json'), updateData(fileData), 'utf8');
+        ctx.response.body = 'success';
+    }
+    catch (error) {
+        ctx.response.body = 'error';
+        console.log(error);
+    }
 });
 //# sourceMappingURL=file.js.map

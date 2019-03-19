@@ -82,16 +82,10 @@ export const uploadFile = (ctx: any, next: Function) =>  {
 /**
  * @desc 更新data/data.json文件中的数据
  */
-export const updateFileContent = async(ctx: any, next: Function) =>  {
+export const updateFileContent = async(ctx: any) =>  {
     const { company, product, change } = ctx.request.body
-    let database
-    // interface  ReqData {
-    //     company: String; 
-    //     product: String; 
-    //     change: Number;
-    // }
     const updateData = (data: string) => {
-        database = JSON.parse(data) 
+        const database = JSON.parse(data) 
         const item = database[company][product]
         const oldTotal = item[item.length -1] ? item[item.length -1].total : 0 
         database[company][product].push({
@@ -99,23 +93,21 @@ export const updateFileContent = async(ctx: any, next: Function) =>  {
             change,
             date: dayJs(Date()).format('YYYY-MM-DD HH:mm:ss')
         })
+
+        return JSON.stringify(database, null, 4)
     }
-
-    await fs.readFile(path.join('./server/data/data.json'), 'utf8', (err, data) => {
-        if(err) throw err
-        updateData(data)
-        console.log('read');
+    
+    try {
+        /**
+         * 使用同步方法
+         */
+        const fileData = fs.readFileSync(path.join('./server/data/data.json'), 'utf8')
+        fs.writeFileSync(path.join('./server/data/data.json'), updateData(fileData), 'utf8') 
+        ctx.response.body = 'success'  
         
-    })
-
-    await fs.writeFile(path.join('./server/data/data.json'),JSON.stringify(database), 'utf8', (err) => {
-        if (err) throw err;
-        console.log('write');
-        ctx.response.body = 'niaho'
-    }) 
-   
-    console.log('end');
-    // console.log(newData);
-    next()
+    } catch (error) {
+        ctx.response.body = 'error'  
+        console.log(error);
+    }
 }
 
