@@ -14,4 +14,4 @@ connection.query('SELECT * FROM city', function(error, results, fields) {
     console.log(results[0].name);
 })
 
-connection.end
+connection.end()
