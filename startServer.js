@@ -6,7 +6,7 @@ exec('start cmd /K nodemon server/app.js', [], (err, stdout, stderr) => {
         console.log(err);
         return;
     }
-    console.log(`nodemon stdout: ${stdout}`);
+    console.log(`nodemon success: ${stdout}`);
 });
 
 /**
@@ -18,7 +18,7 @@ exec('start cmd /K tsc -w', [], (err, stdout, stderr) => {
         console.log(err);
         return;
     }
-    console.log(`tsc stdout: ${stdout}`);
+    console.log(`tsc success: ${stdout}`);
 });
 
 

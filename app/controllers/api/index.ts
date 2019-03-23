@@ -1,8 +1,12 @@
 import path from 'path'
+
+/**
+ * @desc 操作 multipart/form-data 
+ */
 import multer from 'koa-multer'
 
 /**
- * @description 当没有默认导出时要用 * 防止报错
+ * @desc 当没有默认导出时要用 * 防止报错
  */
 import * as file from './file'
 import * as api from './api'
@@ -15,17 +19,20 @@ exports.api = (router: any) => {
 
     /**
     * @desc 以下两个接口用于单页面路由与indexedDB
+    *  事例：http://localhost:2500/page/one；http://localhost:2500/html/a/
     */
-    // http://localhost:2500/page/one
     router.get('/page/:path/', file.renderSPA)
-
-    // http://localhost:2500/html/a/
     router.get('/html/:htmlFileName/', file.renderHtml)
 
     /**
-     * @desc GET POST PATCH PUT
+     * 修改/data/data.json文件
      */
+    router.post('/api/updateFinatialData/', file.updateFileContent)
 
-    // for work
+    /**
+     * @desc  for work test
+     */
     router.get('/api/myNode/vList/', api.vList)
+    router.get('/api/myNode/record/', api.getRecord)
+
 }
