@@ -16,7 +16,7 @@ export function renderSPA(ctx: any, next: Function) {
  * @desc 根据获取的参数渲染 views/html 中的 html 文件
  */
 export function renderHtml(ctx: any, next: Function) {
-    const pages = ['indexedDB']
+    const pages = ['indexedDB', 'a']
     let name = ctx.params.htmlFileName 
 
     name = pages.indexOf(name) > -1 ? name : pages[0]

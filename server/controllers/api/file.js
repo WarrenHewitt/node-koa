@@ -19,7 +19,7 @@ exports.renderSPA = renderSPA;
  * @desc 根据获取的参数渲染 views/html 中的 html 文件
  */
 function renderHtml(ctx, next) {
-    const pages = ['indexedDB'];
+    const pages = ['indexedDB', 'a'];
     let name = ctx.params.htmlFileName;
     name = pages.indexOf(name) > -1 ? name : pages[0];
     ctx.response.type = 'html';
