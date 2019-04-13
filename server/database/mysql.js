@@ -16,5 +16,5 @@ connection.query('SELECT * FROM city', function (error, results, fields) {
         throw error;
     console.log(results[0].name);
 });
-connection.end;
+connection.end();
 //# sourceMappingURL=mysql.js.map
