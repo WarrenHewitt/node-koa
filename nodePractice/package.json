@@ -1,0 +1,14 @@
+{
+  "name": "nodepractice",
+  "version": "1.0.0",
+  "description": "practice node cli",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^2.20.0"
+  }
+}

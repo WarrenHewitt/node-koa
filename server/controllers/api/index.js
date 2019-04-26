@@ -37,7 +37,9 @@ exports.api = (router) => {
     /**
      * @desc  for work test
      */
-    router.get('/api/myNode/vList/', api.vList);
-    router.get('/api/myNode/record/', api.getRecord);
+    router.get('/jv/drive/tripReservations/', api.vList);
+    router.get('/jv/drive/tripDetails/', api.getRecord);
+    router.get('/jv/drive/dynamic/', api.dynamic);
+    router.get('/jv/drive/tagList/', api.tagList);
 };
 //# sourceMappingURL=index.js.map
