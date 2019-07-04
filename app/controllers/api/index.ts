@@ -32,9 +32,5 @@ exports.api = (router: any) => {
     /**
      * @desc  for work test
      */
-    router.get('/jv/drive/tripReservations/', api.vList)
-    router.get('/jv/drive/tripDetails/', api.getRecord)
-    router.get('/jv/drive/dynamic/', api.dynamic)
-    router.get('/jv/drive/tagList/', api.tagList)
 
 }
