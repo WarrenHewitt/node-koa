@@ -11,6 +11,7 @@ const connection = mysql_1.default.createConnection({
     database: 'database-test'
 });
 connection.connect();
+<<<<<<< HEAD
 const crud = function (sql, type = 'query') {
     return new Promise((resolve) => {
         connection.query(sql, function (error, results, fields) {
@@ -34,4 +35,12 @@ exports.default = {
         return crud(sql);
     }
 };
+=======
+connection.query('SELECT * FROM city', function (error, results, fields) {
+    if (error)
+        throw error;
+    console.log(results[0].name);
+});
+connection.end();
+>>>>>>> 63f0736f3a532c4f7276dafd607d95eb060cd7af
 //# sourceMappingURL=mysql.js.map

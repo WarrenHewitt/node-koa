@@ -44,7 +44,5 @@ exports.api = (router: any) => {
     /**
      * @desc  for work test
      */
-    router.get('/api/myNode/vList/', api.vList)
-    router.get('/api/myNode/record/', api.getRecord)
 
 }
