@@ -23,6 +23,7 @@ const koa_static_1 = __importDefault(require("koa-static"));
 const koa_views_1 = __importDefault(require("koa-views"));
 /**
  * @desc 支持json, form, text 类型的 body
+ * 引入中间件后，会在ctx.request.body放入请求的参数
  */
 const koa_bodyparser_1 = __importDefault(require("koa-bodyparser"));
 // 设置跨域中间件

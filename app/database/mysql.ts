@@ -3,15 +3,31 @@ import mysql from 'mysql'
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '123456',
+    password: 'mysql123456',
     database: 'database-test'
 })
-
 connection.connect();
 
-connection.query('SELECT * FROM city', function(error, results, fields) {
-    if (error) throw error
-    console.log(results[0].name);
-})
+const crud = function(sql:string, type = 'query') {
+    return new Promise((resolve) => {
+        connection.query(sql, function(error:any, results: any, fields:any) {
+            if (error) throw error
+            if(type === 'insert') {
+                resolve(true)
+            } else {
+                resolve(results)
+            }
+        })
+    })
+}
 
-connection.end()
+export default {
+    insert(sql:string) {
+        console.log(1111, sql);
+        return crud(sql, 'insert')
+    },
+
+    query(sql:string) {
+        return crud(sql)
+    }
+}

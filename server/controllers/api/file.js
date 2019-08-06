@@ -16,6 +16,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
+/**
+ * 格式化时间
+ */
 const dayjs_1 = __importDefault(require("dayjs"));
 /**
  * @desc 单页面路由实现

@@ -10,6 +10,7 @@ import multer from 'koa-multer'
  */
 import * as file from './file'
 import * as api from './api'
+import financial from './financial'
 
 const upload = multer({ dest: path.join(__dirname + '/uploadFiles/') })
 
@@ -27,7 +28,18 @@ exports.api = (router: any) => {
     /**
      * 修改/data/data.json文件
      */
-    router.post('/api/updateFinatialData/', file.updateFileContent)
+    router.post('/api/updateFinancialData/', file.updateFileContent)
+
+    /**
+     * @desc financial板块
+     */
+
+    /**
+     * 获取所有的company
+     */
+    router.get('/api/financial/company/',financial.getCompany)
+    router.get('/api/financial/product/',financial.getProducts)
+    router.post('/api/financial/product/',financial.productUpdate)
 
     /**
      * @desc  for work test

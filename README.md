@@ -12,7 +12,7 @@
 ## 开始
 执行如下命令
 
-- npm start  （查看startServer.js）
+- npm start  （查看startServer.js）利用 child_process 的 exec 模块
 
 
 ## 项目内容描述
@@ -20,6 +20,7 @@
 - 表单数据上传
 - 文件上传
 - html，pug模板的渲染
+- 移动文件与文件夹
 
 ---
 

@@ -20,6 +20,7 @@ const koa_multer_1 = __importDefault(require("koa-multer"));
  */
 const file = __importStar(require("./file"));
 const api = __importStar(require("./api"));
+const financial_1 = __importDefault(require("./financial"));
 const upload = koa_multer_1.default({ dest: path_1.default.join(__dirname + '/uploadFiles/') });
 exports.api = (router) => {
     // 上传文件
@@ -33,7 +34,16 @@ exports.api = (router) => {
     /**
      * 修改/data/data.json文件
      */
-    router.post('/api/updateFinatialData/', file.updateFileContent);
+    router.post('/api/updateFinancialData/', file.updateFileContent);
+    /**
+     * @desc financial板块
+     */
+    /**
+     * 获取所有的company
+     */
+    router.get('/api/financial/company/', financial_1.default.getCompany);
+    router.get('/api/financial/product/', financial_1.default.getProducts);
+    router.post('/api/financial/product/', financial_1.default.productUpdate);
     /**
      * @desc  for work test
      */
