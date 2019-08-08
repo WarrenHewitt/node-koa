@@ -7,7 +7,7 @@
 
 [配置文档：https://www.typescriptlang.org/docs/home.html](https://www.typescriptlang.org/docs/home.html)
 
-## Install
+## install
 
 ## 开始
 执行如下命令

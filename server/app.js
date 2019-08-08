@@ -14,32 +14,35 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const path_1 = __importDefault(require("path"));
 const koa_1 = __importDefault(require("koa"));
 const koa_router_1 = __importDefault(require("koa-router"));
-// 静态文件服务 包含在根目录下的所有文件可通过链接直接访问
-const koa_static_1 = __importDefault(require("koa-static"));
+/**
+ * @des 静态文件服务 包含在根目录下的所有文件可通过链接直接访问
+ * 某些模块，需要用ts的方式引入（如下）
+ */
+const koaStatic = require("koa-static");
 /**
  * @desc 支持多个模板pug ejs等 参考https://github.com/tj/consolidate.js 当选择了模板后还要安装该模板
  * @desc 用在路由之前
  */
-const koa_views_1 = __importDefault(require("koa-views"));
+const views = require("koa-views");
 /**
  * @desc 支持json, form, text 类型的 body
  * 引入中间件后，会在ctx.request.body放入请求的参数
  */
 const koa_bodyparser_1 = __importDefault(require("koa-bodyparser"));
 // 设置跨域中间件
-const koa2_cors_1 = __importDefault(require("koa2-cors"));
+const cors = require("koa2-cors");
 const app = new koa_1.default();
 const router = new koa_router_1.default();
 app
-    .use(koa2_cors_1.default({
+    .use(cors({
     origin: function (ctx) {
         return ctx.header.origin;
     },
     // 当前端的 credentials 是true时，这里也必须是true
     credentials: true
 }))
-    .use(koa_views_1.default(path_1.default.join(__dirname + '/views/pug'), { extension: 'pug' }))
-    .use(koa_static_1.default(path_1.default.join(__dirname + '/views/public')))
+    .use(views(path_1.default.join(__dirname + '/views/pug'), { extension: 'pug' }))
+    .use(koaStatic(path_1.default.join(__dirname + '/views/public')))
     .use(koa_bodyparser_1.default())
     .use(router.routes());
 router.get('/', (ctx) => {
@@ -61,8 +64,8 @@ router.get('/pug/', (ctx) => __awaiter(this, void 0, void 0, function* () {
 /**
  * @desc 以下为 api 接口
  */
-const adminApi = require('./controllers/api/index.js');
-adminApi.api(router);
+const index_1 = __importDefault(require("./controllers/api/index"));
+index_1.default(router);
 /**
  * 监听报错信息
  */

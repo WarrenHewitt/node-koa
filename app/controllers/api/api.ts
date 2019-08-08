@@ -42,9 +42,7 @@ export function applyingList(ctx: any) {
 
 export function randomShare(ctx: any) {
     const id = ctx.request.body
-    let a = [
-      
-    ]
+    let a:any =  []
     if(id.ids && id.ids.length>5){
       a = []
     }

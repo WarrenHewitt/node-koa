@@ -55,9 +55,11 @@ function copyFile(copiedPath, resultPath) {
 /**
  * @des 复制文件夹
  */
-function copyFolder(copiedPath, resultPath) {
-    copiedPath = path.join(__dirname, copiedPath)
-    resultPath = path.join(__dirname, resultPath)
+function copyFolder(copiedPath, resultPath, direct) {
+    if(!direct) {
+        copiedPath = path.join(__dirname, copiedPath)
+        resultPath = path.join(__dirname, resultPath)
+    }
 
     function createDir (dirPath) {
         fs.mkdirSync(dirPath)        
@@ -90,15 +92,10 @@ function copyFolder(copiedPath, resultPath) {
                     /**
                      * @des 判断读(R_OK | W_OK)写权限
                      */
-                    console.log(fs.accessSync(crp, fs.constants.W_OK));
-                    if (fs.accessSync(crp, fs.constants.W_OK)) {
-                        copiedPath(crp)
-                        copyFolder(ccp, crp)
-                    } else {
-                        console.log('no limit');
-                    }
+                    fs.accessSync(path.join(crp, '..'), fs.constants.W_OK)
+                    copyFolder(ccp, crp, true)
                 } catch (error) {
-                    console.log('write error:', error);
+                    console.log('folder write error:', error);
                 }
 
             }

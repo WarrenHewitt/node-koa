@@ -2,14 +2,17 @@ import path from 'path'
 import Koa from 'koa'
 import Router from 'koa-router'
 
-// 静态文件服务 包含在根目录下的所有文件可通过链接直接访问
-import koaStatic from 'koa-static'
+/**
+ * @des 静态文件服务 包含在根目录下的所有文件可通过链接直接访问
+ * 某些模块，需要用ts的方式引入（如下） 
+ */
+import koaStatic = require('koa-static')
 
 /**
  * @desc 支持多个模板pug ejs等 参考https://github.com/tj/consolidate.js 当选择了模板后还要安装该模板
  * @desc 用在路由之前
  */
-import views from 'koa-views'
+import views = require('koa-views')
 
 /**
  * @desc 支持json, form, text 类型的 body
@@ -18,14 +21,14 @@ import views from 'koa-views'
 import bodyParser from 'koa-bodyparser'
 
 // 设置跨域中间件
-import cors from 'koa2-cors'
+import cors = require('koa2-cors')
 
 const app = new Koa()
 const router = new Router()
 
 app
     .use(cors({
-        origin: function(ctx) {
+        origin: function(ctx: any) {
             return ctx.header.origin
         },
         // 当前端的 credentials 是true时，这里也必须是true
@@ -58,8 +61,9 @@ router.get('/pug/', async (ctx: any) => {
 /**
  * @desc 以下为 api 接口
  */
-const adminApi = require('./controllers/api/index.js')
-adminApi.api(router)
+
+import adminApi from './controllers/api/index';
+adminApi(router)
  
 /**
  * 监听报错信息
