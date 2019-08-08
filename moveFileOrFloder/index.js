@@ -1,6 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const child_process = require('child_process')
+const fsEx = require('fs-extra')
 
 /**
  * @des 实验性API
@@ -9,10 +10,10 @@ const fsPromises = require('fs').promises
 
 /**
  * @des 命令传参
- * 执行 node ./moveFileOrFloder/index.js 2222 3333
+ * 执行 node ./moveFileOrFolder/index.js 2222 3333
  * 输出：
  * 0: C:\Program Files\nodejs\node.exe
- * 1: G:\GitHub\node-koa\moveFileOrFloder\index.js
+ * 1: G:\GitHub\node-koa\moveFileOrFolder\index.js
  * 2: 2222
  * 3: 3333
  */
@@ -25,6 +26,9 @@ const fsPromises = require('fs').promises
  * @des 复制文件
  */
 function copyFile(copiedPath, resultPath) {
+    copiedPath = path.join(__dirname, copiedPath)
+    resultPath = path.join(__dirname, resultPath)
+
     try {
         /**
          * @des 方式一
@@ -33,7 +37,7 @@ function copyFile(copiedPath, resultPath) {
         /**
          * @des 方式二
          */
-        fs.copyFileSync(copiedPath, resultPath)
+        // fs.copyFileSync(copiedPath, resultPath)
         console.log('success');
     } catch (error) {
         console.log(error);
@@ -41,34 +45,82 @@ function copyFile(copiedPath, resultPath) {
     /**
      * @des 方式三
      */
-    // fsPromises.copyFile(copiedPath, resultPath)
-    // .then(() => {
-    //     console.log('success');    
-    // }).catch((err) => {
-    //     console.log(err);
-    // });
+    fsPromises.copyFile(copiedPath, resultPath)
+        .then(() => {
+            console.log('success');
+        }).catch((err) => {
+            console.log(err);
+        });
 }
 /**
  * @des 复制文件夹
  */
-function copyFloder(copiedPath, resultPath) {
-    /**
-     * @des 方式一：利用子进程操作命令行方式
-     */
-    child_process.spawn('cp', ['-r', copiedPath, resultPath])
+function copyFolder(copiedPath, resultPath) {
+    copiedPath = path.join(__dirname, copiedPath)
+    resultPath = path.join(__dirname, resultPath)
 
-    /**
-     * @des 方式二：
-     */
+    function createDir (dirPath) {
+        fs.mkdirSync(dirPath)        
+    }
+
+    if (fs.existsSync(copiedPath)) {
+        createDir(resultPath)
+        /**
+         * @des 方式一：利用子进程操作命令行方式
+         */
+        // child_process.spawn('cp', ['-r', copiedPath, resultPath])
+
+        /**
+         * @des 方式二：
+         */
+        const files = fs.readdirSync(copiedPath, { withFileTypes: true });
+        for (let i = 0; i < files.length; i++) {
+            const cf = files[i]
+            const ccp = path.join(copiedPath, cf.name)
+            const crp = path.join(resultPath, cf.name)  
+            if (cf.isFile()) {
+                /**
+                 * @des 创建文件,使用流的形式可以读写大文件
+                 */
+                const readStream = fs.createReadStream(ccp)
+                const writeStream = fs.createWriteStream(crp)
+                readStream.pipe(writeStream)
+            } else {
+                try {
+                    /**
+                     * @des 判断读(R_OK | W_OK)写权限
+                     */
+                    console.log(fs.accessSync(crp, fs.constants.W_OK));
+                    if (fs.accessSync(crp, fs.constants.W_OK)) {
+                        copiedPath(crp)
+                        copyFolder(ccp, crp)
+                    } else {
+                        console.log('no limit');
+                    }
+                } catch (error) {
+                    console.log('write error:', error);
+                }
+
+            }
+        }
+    } else {
+        console.log('do not exist path: ', copiedPath);
+    }
 }
 
 /**
  * @des 删除文件
  */
-function deleteFile(delPath) {
+function deleteFile(delPath, direct) {
+    delPath = direct ? delPath : path.join(__dirname, delPath)
     try {
-        if(fs.existsSync(delPath)) {
-            fs.unlinkSync(delPath);    
+        /**
+         * @des 判断文件或文件夹是否存在
+         */
+        if (fs.existsSync(delPath)) {
+            fs.unlinkSync(delPath);
+        } else {
+            console.log('inexistence path：', delPath);
         }
     } catch (error) {
         console.log('del error', error);
@@ -78,53 +130,80 @@ function deleteFile(delPath) {
 /**
  * @des 删除文件夹
  */
-function deleteFloder(delPath) {
+function deleteFolder(delPath) {
+    delPath = path.join(__dirname, delPath)
+
     try {
-        if(fs.existsSync(delPath)) {
+        if (fs.existsSync(delPath)) {
             /**
              * @des 方式一: 只能删空文件
              */
-            const delFn = function(address) {
+            const delFn = function (address) {
                 const files = fs.readdirSync(address)
                 for (let i = 0; i < files.length; i++) {
-                    const dirPath = path.join(address, files[i]) 
-                    if(fs.statSync(dirPath).isDirectory()) {
+                    const dirPath = path.join(address, files[i])
+                    if (fs.statSync(dirPath).isDirectory()) {
                         delFn(dirPath)
                     } else {
-                        deleteFile(dirPath)
+                        deleteFile(dirPath, true)
                     }
-
-                } 
+                }
                 /**
                 * @des 只能删空文件
                 */
-                fs.rmdirSync(address);  
+                fs.rmdirSync(address);
             }
             delFn(delPath);
+        } else {
+            console.log('do not exist: ', delPath);
         }
     } catch (error) {
-        console.error('del folder error', error);
+        console.log('del folder error', error);
     }
 }
 
 const type = process.argv[2]
 
+function execute() {
+    /**
+     * @des 请根据不同的条件传递参数
+     */
+    if (type === 'copyFile') {
+        copyFile('./p/a.txt', './c/k.txt')
+    }
+
+    if (type === 'copyFolder') {
+        copyFolder('./p', './a')
+    }
+
+    if (type === 'delFile') {
+        deleteFile('./c/ss.txt')
+    }
+
+    if (type === 'delFolder') {
+        deleteFolder('./a')
+    }
+}
+
+execute()
+
+
 /**
- * @des 请根据不同的条件传递参数
+ * @des fs-extra 包实现
+ * api参考: https://github.com/jprichardson/node-fs-extra
  */
-if(type === 'copyFile') {
-    copyFile('./moveFileOrFloder/p/a.txt', './moveFileOrFloder/p/b.txt')
+
+function fsExtra() {
+    async function copy() {
+        try {
+            await fsEx.copy(path.join(__dirname + '/p'), path.join(__dirname + '/d'))
+            console.log('success');
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    copy()
 }
 
-if(type === 'copyFloder') {
-    copyFloder('./moveFileOrFloder/p', './moveFileOrFloder/c')
-}
-
-if(type === 'delFile') {
-    deleteFile('./moveFileOrFloder/p/b.txt')
-}
-
-if(type === 'delFloder') {
-    deleteFloder('./moveFileOrFloder/c')
-}
-
+//  fsExtra()
