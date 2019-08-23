@@ -132,9 +132,6 @@ function deleteFolder(delPath) {
 
     try {
         if (fs.existsSync(delPath)) {
-            /**
-             * @des 方式一: 只能删空文件
-             */
             const delFn = function (address) {
                 const files = fs.readdirSync(address)
                 for (let i = 0; i < files.length; i++) {
