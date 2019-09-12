@@ -97,7 +97,6 @@ function copyFolder(copiedPath, resultPath, direct) {
                 } catch (error) {
                     console.log('folder write error:', error);
                 }
-
             }
         }
     } else {

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>practice</title>
+</head>
+
+<body>
+    <script>
+        function fn1() {
+            console.log('fn1')
+        }
+
+        function fn2() {
+            console.log('fn2')
+        }
+
+        function fn3() {
+            console.log('fn3')
+        }
+
+        fn1.bind(this)()
+        fn2.bind().bind(fn1)()
+        fn3.bind().bind(fn2).bind().bind(fn1)()
+    </script>
+</body>
+
+</html>
