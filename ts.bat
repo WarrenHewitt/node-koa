@@ -1,5 +1,3 @@
 @ echo off
-echo hello hello everyone
-
-
-echo 123
+cd batTs
+node t.js
