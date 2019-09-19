@@ -43,6 +43,7 @@
     "typescript": "^3.0.3"
   },
   "devDependencies": {
+    "inquirer": "^7.0.0",
     "nodemon": "^1.17.1",
     "tslint": "^5.11.0"
   }

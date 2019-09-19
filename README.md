@@ -17,10 +17,14 @@
 
 ## 项目内容描述
 - REST请求
+
 - 表单数据上传
+
 - 文件上传
+
 - html，pug模板的渲染
-- 移动文件与文件夹
+
+- 移动文件与文件夹 `/moveFileOrFloder`
 
 ---
 
@@ -31,5 +35,6 @@
 执行：npm run gql
 
 数据库：采用 mongodb 驱动 连接mongoDB
+
 
 
