@@ -2,7 +2,9 @@
 
 ## .bat
 
-执行bat文件： 直接在命令行输入 xxx.bat 如果是 powershell ./xxx.bat
+> 更多命令： https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/windows-commands
+
+执行bat文件： 在bat文件所在目录，打开命令行输入 xxx.bat 如果是 powershell ./xxx.bat
 
 - `echo` 其有回声的意思；功能类似 print， 回显当前命令，并换行输出 echo 后面的字符
 
