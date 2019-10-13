@@ -35,3 +35,8 @@ node test.js
 start cmd /k "cd C:\Users\XXX\Desktop\getIP && python ip.py"
 ```
 
+## sh
+
+文档：https://www.runoob.com/linux/linux-shell.html
+
+- windows 下执行 .sh 文件 可以用 git bash 执行 ./xx.sh 来运行

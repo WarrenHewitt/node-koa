@@ -1,3 +1,6 @@
 @ echo off
 cd test
-node test.js
+rem node test.js
+git clone https://github.com/NameHewei/blog-note.git
+
+echo clone finish
