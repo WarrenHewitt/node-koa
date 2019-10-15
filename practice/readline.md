@@ -1,3 +1,32 @@
+# node 实现与命令行交互
+
+- 时间：2019-10-15 
+- 环境：win10 node-v10.16.1
+
+这里采用两种方式实现
+1. node 自带的 `readline`
+2. 第三方包 `inquirer`
+
+还有其它实现方式如 `commander.js` 等，这里不做具体实现
+
+## readline 实现
+
+引入包
+```js
+const readline = require('readline');
+```
+
+初始创建
+```js
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+    /* 提示信息 */ 
+    // prompt: '请输入：'
+});
+```
+
+```js
 const readline = require('readline');
 const util = require('util');
 const setTimeoutPromise = util.promisify(setTimeout)
@@ -6,7 +35,7 @@ const setTimeoutPromise = util.promisify(setTimeout)
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
-    // 提示信息 
+    /* 提示信息 */ 
     // prompt: '请输入：'
 });
 
@@ -82,3 +111,4 @@ rl.on('pause', function() {
 rl.on('resume', () => {
     console.log('Event resumed');
 });
+```

@@ -1,3 +1,4 @@
+[toc]
 # 使用Koa2+TypeScript 实现的示例
 
 > 相关文件夹 ./app/ 和 ./server/
@@ -35,6 +36,14 @@
 执行：npm run gql
 
 数据库：采用 mongodb 驱动 连接mongoDB
+
+
+# 实践部分 
+> `/practice`
+
+- .bat和.sh 语法实践 `./batTest`
+
+- 文件或文件夹删除复制实践 `./moveFileOrFloder`
 
 
 
