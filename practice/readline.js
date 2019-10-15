@@ -1,6 +1,7 @@
 const readline = require('readline');
 const util = require('util');
-const setTimeoutPromise = util.promisify(setTimeout)
+const setTimeoutPromise = util.promisify(setTimeout);
+const generatorTemplate = require('./generatorTemplate.js');
 
 
 const rl = readline.createInterface({
@@ -24,13 +25,13 @@ rl.prompt();
  * 2. 如下的write是模仿ctrl + u 功能，删除当前行的输入内容
  */
 rl.write('this is the content to be deleted!');
-setTimeoutPromise(1000, 'par')
+setTimeoutPromise(2000, 'par')
     .then((val) => {
         /**
          * @des 延迟执行 看清删除过程
          */
         rl.write(null, { ctrl: true, name: 'u' });
-        console.log(' immediate arg:', val);
+        rl.write(`immediate arg-${val}\n`);
     }).catch((err) => {
         console.log(err);
     });
@@ -45,6 +46,7 @@ rl.on('line', function(input) {
     console.log(`Event line, you input: ${input}`);
     rl.setPrompt('');
     if(input === 'right') {
+        generatorTemplate.generator()        
         rl.close()
     } else if (input === 'pause') {
         rl.pause()

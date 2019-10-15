@@ -1,3 +1,5 @@
+const generatorTemplate = require('./generatorTemplate.js');
+
 const processEnvFn = () => {
     /**
    * @des  process 是全局提供，不需要用 require 引入
@@ -17,8 +19,9 @@ const processFn = () => {
     const handleInput = (input) => {
         if(input === 'student') {
             process.stdout.write('there is student here: hew\n')
-        } else if(input === 'score') {
-            process.stdout.write('the score are: 88\n')
+        } else if(input === 'template') {
+            generatorTemplate.generator()
+            process.stdin.emit('end');
         } else {
             process.stdout.write('some other input message\n')
             process.stdin.emit('end');
