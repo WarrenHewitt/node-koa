@@ -1,5 +1,5 @@
 /**
- * @des  child_process  provide the ability to spawn(生成) child process
+ * @des  child_process：provide the ability to spawn(生成) child process
  * 1. exec 和 execFile 是对 spawn 的封装
  * 2. exec比spawn多了一些默认的option
  */

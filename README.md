@@ -45,5 +45,9 @@
 
 - 文件或文件夹删除复制实践 `./moveFileOrFloder`
 
+- child_process 实践
+
+- node 命令行交互生成模板实践
+
 
 
