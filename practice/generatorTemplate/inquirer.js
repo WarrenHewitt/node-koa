@@ -1,4 +1,5 @@
 const inquirer = require('inquirer');
+const generatorTemplate = require('./generatorTemplate.js');
 
 /**
  * @des 还有一种方式参见  commander.js
@@ -9,7 +10,7 @@ inquirer
         {
             type: 'confirm',
             name: 'toBeDelivered',
-            message: 'Is this for delivery?',
+            message: '是否生成模板?',
             default: false
         },
         {
@@ -17,11 +18,15 @@ inquirer
             name: 'choices',
             message: 'Is this for delivery?',
             default: 'check',
-            choices: ['name', 'age']
+            choices: ['yes', 'no']
         }
-        /* Pass your questions in here */
     ])
     .then(answers => {
         console.log(answers);
-        // Use user feedback for... whatever!!
+        /* 输出值为：{ toBeDelivered: true, choices: [ 'name' ] } */
+        if(answers.toBeDelivered && answers.choices[0] === 'yes') {
+            generatorTemplate.generator();
+        } else {
+            console.log('不生成模板');
+        }
     });
