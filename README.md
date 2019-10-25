@@ -41,13 +41,15 @@
 # 实践部分 
 > `/practice`
 
-- .bat和.sh 语法实践 `./batTest`
+- `./batTest`.bat和.sh 语法实践 
 
-- 文件或文件夹删除复制实践 `./moveFileOrFloder`
+- `./childProcess` 实践
 
-- child_process 实践
+- `./moveFileOrFloder`文件或文件夹删除复制实践
 
-- node 命令行交互生成模板实践
+- `./generatorTemplate` 命令行交互生成模板实践
+
+- `./jsonFileConfig` 读写 json 文件
 
 
 
