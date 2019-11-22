@@ -132,6 +132,7 @@ function deleteFolder(delPath) {
     try {
         if (fs.existsSync(delPath)) {
             const delFn = function (address) {
+                /** 返回文件和文件夹名称 */
                 const files = fs.readdirSync(address)
                 for (let i = 0; i < files.length; i++) {
                     const dirPath = path.join(address, files[i])
