@@ -136,6 +136,7 @@ function deleteFolder(delPath) {
                 const files = fs.readdirSync(address)
                 for (let i = 0; i < files.length; i++) {
                     const dirPath = path.join(address, files[i])
+                    /** fs.statSync(dirPath) 返回 fs.Stats 的实例，该实例可以调用 isDirectory 方法  */
                     if (fs.statSync(dirPath).isDirectory()) {
                         delFn(dirPath)
                     } else {

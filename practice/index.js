@@ -1,1 +1,3 @@
-console.log('index.js consoles');
+const path = require('path');
+
+console.log(path.sep);
