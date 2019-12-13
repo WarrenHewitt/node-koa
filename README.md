@@ -13,7 +13,7 @@
 ## 开始
 执行如下命令
 
-- npm start  （查看startServer.js）利用 child_process 的 exec 模块
+- npm start 启动 node 服务  （查看startServer.js）利用 child_process 的 exec 模块
 
 
 ## 项目内容描述
@@ -71,6 +71,7 @@
             |- test.bat
         |- childProcess  (实践)
             |- childProcess.js
+        |- customNodeModule  (自定义 node 包，通过包名引入)
         |- folderForMd.js  (生成 markdown可用的目录)
         |- generatorTemplate  (命令行交互生成模板实践)
             |- generatorTemplate.js

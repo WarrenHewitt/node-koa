@@ -31,6 +31,9 @@ const views = require("koa-views");
 const koa_bodyparser_1 = __importDefault(require("koa-bodyparser"));
 // 设置跨域中间件
 const cors = require("koa2-cors");
+/** 装饰器示例 */
+const decorator_1 = __importDefault(require("./practiceTs/decorator"));
+decorator_1.default();
 const app = new koa_1.default();
 const router = new koa_router_1.default();
 app
