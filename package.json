@@ -8,7 +8,7 @@
     "gql": "nodemon graphql/gql.js",
     "dev": "pm2 start app.js",
     "nodemon": "nodemon server/app.js",
-    "tsc": "tsc -w",
+    "watch": "tsc -w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
