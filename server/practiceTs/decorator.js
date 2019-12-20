@@ -7,39 +7,36 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 function fac() {
-    console.log('fac');
+    // console.log('fac');
     return function (target, propertyKey, descriptor) {
-        console.log('fac deco');
+        // console.log('propertyKey:', propertyKey)
     };
 }
 function manage() {
-    console.log('manage');
+    // console.log('manage');
     return function (target, propertyKey, descriptor) {
-        console.log('manage deco');
+        // console.log('manage deco');
     };
 }
 /**
  * 类装饰器: 类装饰器应用于类构造函数，可以用来监视，修改或替换类定义
- * 1. 利用继承添加属性
  */
 function classExtend(target) {
     return class extends target {
-        constructor(age, name) {
-            super(name);
-            this.age = 1;
-            this.age = age;
+        constructor() {
+            super(...arguments);
+            this.age = 'age';
+            /** 重载name */
+            this.name = 'warren';
         }
     };
 }
 function classLog(originConstructor) {
-    const original = originConstructor;
-    const fn = function () {
-    };
-    fn.prototype = original.prototype;
-    return fn;
+    console.log('log', originConstructor.name);
 }
+// @classExtend
 // @classLog
-let Dec = class Dec {
+class Dec {
     constructor(name) {
         this.name = '';
         this.name = name;
@@ -48,19 +45,17 @@ let Dec = class Dec {
      * @des 组合：由上往下求值，由下往上依次调用
      */
     product() {
-        console.log('product: ', this.name);
+        console.log('product: ', this.name, this.age);
     }
-};
+}
 __decorate([
     fac(),
     manage()
 ], Dec.prototype, "product", null);
-Dec = __decorate([
-    classExtend
-], Dec);
 function default_1() {
-    const dec = new Dec('hew');
-    console.log('=========');
+    // const dec = new Dec('hew')
+    // dec.product()
+    // console.log('=========');
 }
 exports.default = default_1;
 //# sourceMappingURL=decorator.js.map
