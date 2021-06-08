@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.restPut = exports.restPost = exports.restGet = void 0;
 const common_1 = require("../../utils/common");
 /**
  * @des get方法

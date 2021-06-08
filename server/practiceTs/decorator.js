@@ -14,7 +14,9 @@ function fac() {
 }
 function manage() {
     // console.log('manage');
-    return function (target, propertyKey, descriptor) {
+    return function (
+    // target, propertyKey: string, descriptor: PropertyDescriptor
+    ) {
         // console.log('manage deco');
     };
 }
@@ -44,13 +46,13 @@ class Dec {
     /**
      * @des 组合：由上往下求值，由下往上依次调用
      */
+    // @manage()
     product() {
-        console.log('product: ', this.name, this.age);
+        // console.log('product: ', this.name, this.age);
     }
 }
 __decorate([
-    fac(),
-    manage()
+    fac()
 ], Dec.prototype, "product", null);
 function default_1() {
     // const dec = new Dec('hew')

@@ -65,9 +65,14 @@ router.get('/pug/', async (ctx: any) => {
 /**
  * @desc 以下为 api 接口
  */
-
 import adminApi from './controllers/api/index';
 adminApi(router)
+
+/**
+ * @desc 以下为 部分数据库 api 接口
+ */
+import databaseApi from './controllers/databaseOperate/index';
+databaseApi(router)
  
 /**
  * 监听报错信息

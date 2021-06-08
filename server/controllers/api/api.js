@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.detail = exports.randomShare = exports.applyingList = exports.dynamic = exports.getRecord = exports.vList = void 0;
 /**
  * FOR WORK
  */

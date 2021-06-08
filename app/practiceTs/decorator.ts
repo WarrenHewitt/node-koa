@@ -7,7 +7,9 @@ function fac() {
 
 function manage() {
     // console.log('manage');
-    return function (target, propertyKey: string, descriptor: PropertyDescriptor) {
+    return function (
+        // target, propertyKey: string, descriptor: PropertyDescriptor
+        ) {
         // console.log('manage deco');
     }
 }
@@ -41,9 +43,9 @@ class Dec {
      * @des 组合：由上往下求值，由下往上依次调用
      */
     @fac()
-    @manage()
+    // @manage()
     product() {
-        console.log('product: ', this.name, this.age);
+        // console.log('product: ', this.name, this.age);
     }
 }
 
