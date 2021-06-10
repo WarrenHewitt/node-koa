@@ -51,4 +51,3 @@ function detail(ctx) {
     ctx.response.body = formatReturnData(a);
 }
 exports.detail = detail;
-//# sourceMappingURL=api.js.map

@@ -16,7 +16,6 @@ export default {
         // return crud(sql)
         const Cat = mongoose.model('users', { name: String });
         const result = await Cat.find({})
-        console.log(result);
         return result
         // const kitty = new Cat({ name: 'Zildjian' });
         // kitty.save().then(() => console.log('meow'));

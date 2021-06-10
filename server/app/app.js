@@ -21,7 +21,7 @@ const koa_router_1 = __importDefault(require("koa-router"));
  */
 const koaStatic = require("koa-static");
 /**
- * @desc 支持多个模板pug ejs等 参考https://github.com/tj/consolidate.js 当选择了模板后还要安装该模板
+ * @desc 支持多个模板pug ejs等 参考 https://github.com/tj/consolidate.js 当选择了模板后还要安装该模板
  * @desc 用在路由之前
  */
 const views = require("koa-views");
@@ -45,8 +45,8 @@ app
     // 当前端的 credentials 是true时，这里也必须是true
     credentials: true
 }))
-    .use(views(path_1.default.join(__dirname + '/views/pug'), { extension: 'pug' }))
-    .use(koaStatic(path_1.default.join(__dirname + '/views/public')))
+    .use(views(path_1.default.join(__dirname + '../views/pug'), { extension: 'pug' }))
+    .use(koaStatic(path_1.default.join(__dirname + '../views/public')))
     .use(koa_bodyparser_1.default())
     .use(router.routes());
 router.get('/', (ctx) => {
@@ -76,6 +76,14 @@ index_1.default(router);
 const index_2 = __importDefault(require("./controllers/databaseOperate/index"));
 index_2.default(router);
 /**
+ * @desc puppeteer
+ */
+const puppeteer_1 = require("./puppeteer/puppeteer");
+router.get('/api/puppeteer/screen', (ctx) => {
+    puppeteer_1.screen();
+    ctx.response.body = 2333;
+});
+/**
  * 监听报错信息
  */
 app.on('error', err => console.error(`error occured: ${err.message}`));
@@ -83,4 +91,3 @@ const port = 2500;
 app.listen(port, () => {
     console.log(`listen on port: ${port}`);
 });
-//# sourceMappingURL=app.js.map

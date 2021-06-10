@@ -7,11 +7,11 @@ exports.formatReturnData = void 0;
  * @param code
  * @param msg
  */
-exports.formatReturnData = function (data, code = 200, msg = 'success') {
+const formatReturnData = function (data, code = 200, msg = 'success') {
     return {
         'code': code,
         'results': data,
         'msg': msg
     };
 };
-//# sourceMappingURL=common.js.map
+exports.formatReturnData = formatReturnData;

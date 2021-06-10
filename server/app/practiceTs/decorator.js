@@ -60,4 +60,3 @@ function default_1() {
     // console.log('=========');
 }
 exports.default = default_1;
-//# sourceMappingURL=decorator.js.map

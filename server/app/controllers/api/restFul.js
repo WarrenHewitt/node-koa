@@ -34,4 +34,3 @@ function restPut(ctx) {
     });
 }
 exports.restPut = restPut;
-//# sourceMappingURL=restFul.js.map

@@ -34,4 +34,3 @@ exports.default = {
         return crud(sql);
     }
 };
-//# sourceMappingURL=mysql.js.map

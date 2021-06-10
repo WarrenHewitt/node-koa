@@ -1,7 +1,7 @@
 const { exec } = require('child_process');
 
 // 启动项目
-exec('start cmd /K nodemon server/app.js', [], (err, stdout, stderr) => {
+exec('start cmd /K nodemon server/app/app.js', [], (err, stdout, stderr) => {
     if(err) {
         console.log(err);
         return;

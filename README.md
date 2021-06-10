@@ -34,9 +34,18 @@
 
 ---
 
+##  数据库
+
+`/app/database`  有 Mongo 和 MySQL
+
+## 爬虫
+
+`/app/puppeteer`
+用的 puppeteer 库
+
 # graphql 
 
-> 项目放于 ./graphql/
+`/graphql/`
 
 执行：npm run gql
 
@@ -47,7 +56,7 @@
 
 ```
 |- node-koa
-    |- app  (ts 相关代码)
+    |- app  (主要的功能代码)
         |- app.ts
         |- controllers
             |- api
@@ -56,11 +65,14 @@
                 |- financial.ts
                 |- index.ts
                 |- restFul.ts
+            |- databaseOperate 数据库操作
         |- database
-            |- mongo.js
+            |- mongo.ts  使用mongoose连接数据库
             |- mysql.ts
         |- utils
             |- common.ts
+
+        |- puppeteer puppeteer库的实践   
     |- graphql  (graphql 实践)
         |- database.js
         |- gql.js
@@ -84,6 +96,10 @@
         |- moveFileOrFloder  (文件或文件夹删除复制实践)
             |- index.js
         |- practice.js
+    
+    |- server  ts编译后的文件和需要直接放在这里执行的 js 文件
+        |- views 包括静态资源 img pug html 等
+
     |- startServer.js  (启动ts项目脚本)
     |- tsconfig.json  (ts配置文件)
 ```

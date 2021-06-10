@@ -9,7 +9,7 @@ import Router from 'koa-router'
 import koaStatic = require('koa-static')
 
 /**
- * @desc 支持多个模板pug ejs等 参考https://github.com/tj/consolidate.js 当选择了模板后还要安装该模板
+ * @desc 支持多个模板pug ejs等 参考 https://github.com/tj/consolidate.js 当选择了模板后还要安装该模板
  * @desc 用在路由之前
  */
 import views = require('koa-views')
@@ -38,8 +38,8 @@ app
         // 当前端的 credentials 是true时，这里也必须是true
         credentials: true
     }))
-    .use(views(path.join(__dirname + '/views/pug'), { extension: 'pug' }))
-    .use(koaStatic(path.join(__dirname + '/views/public')))
+    .use(views(path.join(__dirname + '../views/pug'), { extension: 'pug' }))
+    .use(koaStatic(path.join(__dirname + '../views/public')))
     .use(bodyParser())
     .use(router.routes())
 
@@ -73,6 +73,16 @@ adminApi(router)
  */
 import databaseApi from './controllers/databaseOperate/index';
 databaseApi(router)
+
+/**
+ * @desc puppeteer
+ */
+import { screen } from './puppeteer/puppeteer';
+router.get('/api/puppeteer/screen', (ctx: any) => {
+    screen()
+    ctx.response.body = 2333
+})
+
  
 /**
  * 监听报错信息

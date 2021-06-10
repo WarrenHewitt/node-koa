@@ -49,7 +49,7 @@ exports.renderHtml = renderHtml;
 /**
  * @desc 保存通过base64 方式传过来的图片
  */
-exports.upBase64 = (ctx) => {
+const upBase64 = (ctx) => {
     const data = ctx.request.body;
     const base64 = data.data;
     const buffer = new Buffer(base64, 'base64');
@@ -60,10 +60,11 @@ exports.upBase64 = (ctx) => {
     });
     ctx.body = 'ok';
 };
+exports.upBase64 = upBase64;
 /**
  * @desc 保存通过formData 方式传过来的图片
  */
-exports.upFormData = (ctx) => {
+const upFormData = (ctx) => {
     const data = ctx.request.body.files.data;
     const savePath = path_1.default.join(`./files`, data.name);
     const reader = fs_1.default.createReadStream(data.path);
@@ -71,10 +72,11 @@ exports.upFormData = (ctx) => {
     console.log(reader.pipe(writer));
     ctx.body = 'http://localhost:1112/' + data.name;
 };
+exports.upFormData = upFormData;
 /**
  * @desc 接收上传的excel等文件
  */
-exports.uploadFile = (ctx, next) => {
+const uploadFile = (ctx, next) => {
     console.log(ctx);
     // const data = ctx.request.body.file.data;
     // const savePath = path.join(`./`, data.name)
@@ -86,10 +88,11 @@ exports.uploadFile = (ctx, next) => {
     ctx.body = 'http://localhost:1112/';
     next();
 };
+exports.uploadFile = uploadFile;
 /**
  * @desc 更新data/data.json文件中的数据
  */
-exports.updateFileContent = (ctx) => __awaiter(void 0, void 0, void 0, function* () {
+const updateFileContent = (ctx) => __awaiter(void 0, void 0, void 0, function* () {
     const { company, product, change } = ctx.request.body;
     const updateData = (data) => {
         const database = JSON.parse(data);
@@ -115,4 +118,4 @@ exports.updateFileContent = (ctx) => __awaiter(void 0, void 0, void 0, function*
         console.log(error);
     }
 });
-//# sourceMappingURL=file.js.map
+exports.updateFileContent = updateFileContent;

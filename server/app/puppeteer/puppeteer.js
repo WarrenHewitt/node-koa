@@ -12,17 +12,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const mongo_1 = __importDefault(require("../../database/mongo"));
-const getUsers = () => {
-    return mongo_1.default.query();
-};
-exports.default = (router) => {
-    /**
-     * @des 查询接口
-     */
-    router.get('/api/users/', (ctx) => __awaiter(void 0, void 0, void 0, function* () {
-        const result = yield getUsers();
-        ctx.response.body = result;
-    }));
-};
-//# sourceMappingURL=index.js.map
+exports.screen = void 0;
+const puppeteer_1 = __importDefault(require("puppeteer"));
+const screen = () => __awaiter(void 0, void 0, void 0, function* () {
+    /* 截屏一个网站的首页 */
+    const browser = yield puppeteer_1.default.launch();
+    const page = yield browser.newPage();
+    yield page.goto('https://www.baidu.com');
+    yield page.screenshot({ path: '../view/public/aexample.png' });
+    yield browser.close();
+});
+exports.screen = screen;

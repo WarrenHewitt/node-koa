@@ -54,4 +54,3 @@ exports.default = {
         });
     }
 };
-//# sourceMappingURL=financial.js.map

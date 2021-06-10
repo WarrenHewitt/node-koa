@@ -24,11 +24,9 @@ exports.default = {
             // return crud(sql)
             const Cat = mongoose.model('users', { name: String });
             const result = yield Cat.find({});
-            console.log(result);
             return result;
             // const kitty = new Cat({ name: 'Zildjian' });
             // kitty.save().then(() => console.log('meow'));
         });
     }
 };
-//# sourceMappingURL=mongo.js.map
