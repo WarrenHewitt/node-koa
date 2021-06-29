@@ -10,6 +10,8 @@
 
 ## install
 
+`yarn install`
+
 ## 开始
 执行如下命令
 
