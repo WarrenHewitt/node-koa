@@ -91,5 +91,5 @@ app.on('error', err => console.error(`error occured: ${err.message}`));
 
 const port = 2500
 app.listen(port, () => {
-    console.log(`listen on port: ${port}`);
+    console.log(`listen on port(default 2500): ${port}`);
 });
