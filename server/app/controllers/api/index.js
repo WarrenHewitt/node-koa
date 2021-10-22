@@ -33,7 +33,7 @@ const koa_multer_1 = __importDefault(require("koa-multer"));
 const file = __importStar(require("./file"));
 const restFul = __importStar(require("./restFul"));
 // import financial from './financial'
-const upload = koa_multer_1.default({ dest: path_1.default.join(__dirname + '/uploadFiles/') });
+const upload = (0, koa_multer_1.default)({ dest: path_1.default.join(__dirname + '/uploadFiles/') });
 exports.default = (router) => {
     /**
      * @des 测试restFul 接口

@@ -23,10 +23,6 @@ import bodyParser from 'koa-bodyparser'
 // 设置跨域中间件
 import cors = require('koa2-cors')
 
-/** 装饰器示例 */
-import dec from './practiceTs/decorator'
-dec();
-
 const app = new Koa()
 const router = new Router()
 
@@ -45,6 +41,14 @@ app
 
 router.get('/', (ctx: any) => {
     ctx.response.body = 'hello koa-typescript'
+})
+
+
+/** 装饰器示例 */
+import dec from './tsGrammar/decorator'
+router.get('/decorator', (ctx: any) => {
+    dec();
+    ctx.response.body = '请查看服务器控制台，输出信息'
 })
 
 /**

@@ -7,7 +7,7 @@ const common_1 = require("../../utils/common");
  * @param ctx
  */
 function restGet(ctx) {
-    ctx.response.body = common_1.formatReturnData({
+    ctx.response.body = (0, common_1.formatReturnData)({
         method: 'get'
     });
 }
@@ -17,7 +17,7 @@ exports.restGet = restGet;
  * @param ctx
  */
 function restPost(ctx) {
-    ctx.response.body = common_1.formatReturnData({
+    ctx.response.body = (0, common_1.formatReturnData)({
         method: 'post',
         bodyParams: ctx.request.body
     });
@@ -28,7 +28,7 @@ exports.restPost = restPost;
  * @param ctx
  */
 function restPut(ctx) {
-    ctx.response.body = common_1.formatReturnData({
+    ctx.response.body = (0, common_1.formatReturnData)({
         method: 'put',
         bodyParams: ctx.request.body
     });

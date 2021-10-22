@@ -1,13 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -32,9 +23,6 @@ const views = require("koa-views");
 const koa_bodyparser_1 = __importDefault(require("koa-bodyparser"));
 // 设置跨域中间件
 const cors = require("koa2-cors");
-/** 装饰器示例 */
-const decorator_1 = __importDefault(require("./practiceTs/decorator"));
-decorator_1.default();
 const app = new koa_1.default();
 const router = new koa_router_1.default();
 app
@@ -47,40 +35,46 @@ app
 }))
     .use(views(path_1.default.join(__dirname + '../views/pug'), { extension: 'pug' }))
     .use(koaStatic(path_1.default.join(__dirname + '../views/public')))
-    .use(koa_bodyparser_1.default())
+    .use((0, koa_bodyparser_1.default)())
     .use(router.routes());
 router.get('/', (ctx) => {
     ctx.response.body = 'hello koa-typescript';
 });
+/** 装饰器示例 */
+const decorator_1 = __importDefault(require("./tsGrammar/decorator"));
+router.get('/decorator', (ctx) => {
+    (0, decorator_1.default)();
+    ctx.response.body = '请查看服务器控制台，输出信息';
+});
 /**
  * @desc 渲染pug页面
  */
-router.get('/pug/', (ctx) => __awaiter(void 0, void 0, void 0, function* () {
+router.get('/pug/', async (ctx) => {
     /**
      * @desc 因为render内部读取文件是异步的  所以render也是异步的，所以加await
      */
-    yield ctx.render('pug');
+    await ctx.render('pug');
     /**
      *  render前不加 await 就会返回如下同步操作内容
      */
     // ctx.response.body = '同步'
-}));
+});
 /**
  * @desc 以下为 api 接口
  */
 const index_1 = __importDefault(require("./controllers/api/index"));
-index_1.default(router);
+(0, index_1.default)(router);
 /**
  * @desc 以下为 部分数据库 api 接口
  */
 const index_2 = __importDefault(require("./controllers/databaseOperate/index"));
-index_2.default(router);
+(0, index_2.default)(router);
 /**
  * @desc puppeteer
  */
 const puppeteer_1 = require("./puppeteer/puppeteer");
 router.get('/api/puppeteer/screen', (ctx) => {
-    puppeteer_1.screen();
+    (0, puppeteer_1.screen)();
     ctx.response.body = 2333;
 });
 /**
@@ -89,5 +83,5 @@ router.get('/api/puppeteer/screen', (ctx) => {
 app.on('error', err => console.error(`error occured: ${err.message}`));
 const port = 2500;
 app.listen(port, () => {
-    console.log(`listen on port: ${port}`);
+    console.log(`listen on port(default 2500): ${port}`);
 });
