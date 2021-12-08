@@ -1,14 +1,16 @@
 [toc]
 # 使用Koa2+TypeScript 实现的示例
 
-相关文件夹 ./app/ 和 ./server/
+./app  ts 接口代码
+./server 其中的 app 文件为ts编译后的代码
 
 启动项目  
 
-`yarn install` `yarn start` （查看startServer.js）利用 child_process 的 exec 模块
+`yarn install` 安装包 
+`yarn start`   启动项目（查看startServer.js）利用 child_process 的 exec 模块
 
 ## Config
-1. 配置tsconfig.json文件
+1. 配置 tsconfig.json 文件
 
 配置文档：https://www.typescriptlang.org/docs/home.html
 
@@ -76,7 +78,8 @@
         |- database
             |- mongo.ts  使用mongoose连接数据库
             |- mysql.ts
-        |- tsGrammar  ts的一些语法练习
+        |- tsGrammar  ts的一些语法练习  
+            1. 装饰器
         |- utils
             |- common.ts
 

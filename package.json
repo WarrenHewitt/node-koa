@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "no",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "start": "node startServer.js",
+    "start": "node ./startServer.mjs --trace-warnings",
     "gql": "nodemon graphql/gql.js",
     "dev": "pm2 start app.js",
     "nodemon": "nodemon server/app.js",
