@@ -2,11 +2,11 @@
     "compilerOptions": {
         "module": "commonjs",
         "esModuleInterop": true,
-        "target": "es6",
+        "target": "ES2020",
         "noImplicitAny": true,
         "moduleResolution": "node",
-        "sourceMap": true,
-        "outDir": "server",
+        "sourceMap": false,
+        "outDir": "server/app",
         "baseUrl": ".",
         "paths": {
             "*": [

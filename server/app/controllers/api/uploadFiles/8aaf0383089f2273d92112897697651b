@@ -1,0 +1,161 @@
+setPie_origin_right (data) {
+            const chartDom = document.getElementById('pie_origin_right')
+            const myChart = eCharts.init(chartDom)
+            const data1 = 40
+            myChart.setOption(
+                {
+                    grid: {
+                    },
+                    legend: {
+                        show: true,
+                        orient: 'vertical',
+                        top: 50,
+                        bottom: 20,
+                        right: '7%',
+                        textStyle: {
+                            fontSize: 12,
+                            color: '#FFFFFF',
+                        },
+                    },
+                    itemStyle: {
+                        color: 'rgba(9,78,90,1)'
+                    },
+                    graphic: [
+                        {
+                            type: 'text',
+                            left: '30%',
+                            bottom: '5%',
+                            style: {
+                                text: '缺陷处理',
+                                textAlign: 'center',
+                                fill: '#3289CE',
+                                fontSize: 14,
+                            }
+                        },
+                    ],
+                    series: [
+                        {
+                            name: '',
+                            type: 'pie',
+                            radius: ['58%', '45%'],
+                            silent: true,
+                            clockwise: true,
+                            startAngle: 90,
+                            z: 0,
+                            zlevel: 0,
+                            label: {
+                                normal: {
+                                    position: 'center',
+
+                                }
+                            },
+                            data: [{
+                                value: data1,
+                                name: '',
+                                itemStyle: {
+                                    normal: {
+                                        color: { // 完成的圆环的颜色
+                                            colorStops: [{
+                                                offset: 0,
+                                                color: '#4EB5FF' // 0% 处的颜色74,177,254
+                                            }, {
+                                                offset: 1,
+                                                color: '#0269E9' // 100% 处的颜色9,112,235
+                                            }]
+                                        },
+                                    }
+                                }
+                            },
+                            {
+                                value: 100 - data1,
+                                name: '',
+                                label: {
+                                    normal: {
+                                        show: false
+                                    }
+                                },
+                                itemStyle: {
+                                    normal: {
+                                        color: '#11476E',
+                                        opacity: 0
+                                    }
+                                }
+                            }
+                            ],
+                        },
+                        {
+                            name: '',
+                            type: 'gauge',
+                            radius: '58%',
+                            center: ['50%', '50%'],
+                            startAngle: 0,
+                            endAngle: 359.9,
+                            splitNumber: 12,
+                            hoverAnimation: true,
+                            axisTick: {
+                                show: false
+                            },
+                            splitLine: {
+                                length: 92,
+                                lineStyle: {
+                                    width: 2,
+                                    // color: '#094E5A',3,34,53
+                                    color: '#032235',
+                                }
+                            },
+                            axisLabel: {
+                                show: false
+                            },
+                            pointer: {
+                                show: false
+                            },
+                            axisLine: {
+                                lineStyle: {
+                                    opacity: 0
+                                }
+                            },
+                            detail: {
+                                show: false
+                            },
+                            data: [{
+                                value: 0,
+                                name: ''
+                            }]
+                        },
+                        {
+                            type: 'pie',
+                            radius: ['65%', '68%'], // ['外圆大小', '内圆大小']
+                            center: ['50%', '50%'], // 圆心位置['左右'， '上下']
+                            labelLine: {
+                                normal: {
+                                    show: false
+                                }
+                            },
+                            zlevel: 10,
+                            data: [
+                                {
+                                    value: 0.1,
+                                    itemStyle: {
+                                        color: '#12E7E8',
+                                        opacity: 0.6
+                                    }
+                                }
+                            ],
+                            emphasis: {
+                                label: {
+                                    show: true
+                                }
+                            },
+                            label: {
+                                show: true,
+                                position: 'center',
+                                formatter: data1 + '%',
+                                color: '#0673FB',
+                                fontSize: 25,
+                                fontWeight: 'bold',
+                            }
+                        }
+                    ]
+                }
+            )
+        },
