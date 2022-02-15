@@ -5,7 +5,7 @@ const path = require('path')
 const os = require('os')
 const Koa = require('koa')
 const Router = require('koa-router')
-const session = require('koa-session')
+// const session = require('koa-session')
 
 
 // resolve across-domain problem
@@ -92,8 +92,7 @@ app
 // api(router)
 
 router.get('/', (ctx,next) => {
-    console.log(123);
-    ctx.body = 'hello koa-typescript'
+    ctx.body = 'hello 一个可以删除的测试服务'
     next()
 })
 
