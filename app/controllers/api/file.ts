@@ -16,11 +16,13 @@ export function renderSPA(ctx: any, next: Function) {
     /**
      * 路由中使用/:paramsName,可以用ctx.params.paramsName获取参数
      */
+    console.log(ctx.params.path) // one
     ctx.response.type = 'html';
     ctx.response.body = fs.createReadStream('./server/views/html/singlePageRoute.html');
 
     return next();
 }
+
 
 /**
  * @desc 根据获取的参数渲染 views/html 中的 html 文件
@@ -37,6 +39,7 @@ export function renderHtml(ctx: any, next: Function) {
     return next();
 }
 
+
 /**
  * @desc 保存通过base64 方式传过来的图片
  */
@@ -52,35 +55,22 @@ export const upBase64 = (ctx: any) => {
     ctx.body = 'ok'
 }
 
+
 /**
  * @desc 保存通过formData 方式传过来的图片
  */
 export const upFormData = (ctx: any) =>  {
-    const data = ctx.request.body.files.data;
-    const savePath = path.join(`./files`, data.name)
-    const reader = fs.createReadStream(data.path)
-    const writer = fs.createWriteStream(savePath)
-
-    console.log(reader.pipe(writer))
-    ctx.body = 'http://localhost:1112/' + data.name 
-}
-
-/**
- * @desc 接收上传的excel等文件
- */
-export const uploadFile = (ctx: any, next: Function) =>  {
-    console.log(ctx);
-    // const data = ctx.request.body.file.data;
-    // const savePath = path.join(`./`, data.name)
+    console.log('233333', ctx.request.body);
+    // const data = ctx.request.body.files.data;
+    // const savePath = path.join(`./files`, data.name)
     // const reader = fs.createReadStream(data.path)
     // const writer = fs.createWriteStream(savePath)
 
-    // // ctx.body = 'http://localhost:1112/' + data.name
-    // console.log(reader.pipe(writer), savePath)
+    // console.log(reader.pipe(writer))
     // ctx.body = 'http://localhost:1112/' + data.name 
-    ctx.body = 'http://localhost:1112/' 
-    next()
+    ctx.body = 'success' 
 }
+
 
 /**
  * @desc 更新data/data.json文件中的数据

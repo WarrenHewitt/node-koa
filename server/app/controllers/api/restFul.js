@@ -7,6 +7,8 @@ const common_1 = require("../../utils/common");
  * @param ctx
  */
 function restGet(ctx) {
+    // 获取参数采用 ctx.query 或 ctx.request.query 
+    console.log('get queryString', ctx.request.query);
     ctx.response.body = (0, common_1.formatReturnData)({
         method: 'get'
     });
@@ -17,6 +19,8 @@ exports.restGet = restGet;
  * @param ctx
  */
 function restPost(ctx) {
+    console.log('post body', ctx.request.body); // 注意要 application/json 格式请求数据
+    console.log('post body query', ctx.request.query); // 同时获取 queryString
     ctx.response.body = (0, common_1.formatReturnData)({
         method: 'post',
         bodyParams: ctx.request.body
@@ -28,6 +32,8 @@ exports.restPost = restPost;
  * @param ctx
  */
 function restPut(ctx) {
+    /* 用法同上 post */
+    console.log('put body', ctx.request.body);
     ctx.response.body = (0, common_1.formatReturnData)({
         method: 'put',
         bodyParams: ctx.request.body

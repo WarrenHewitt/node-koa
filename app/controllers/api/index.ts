@@ -17,20 +17,27 @@ const upload = multer({ dest: path.join(__dirname + '/uploadFiles/') })
 
 export default (router: any) => {
     /**
-     * @des 测试restFul 接口
+     * @des 测试restFul 接口, 以及参数的获取
      */
-    router.get('/api/res/get/', restFul.restGet)
-    router.post('/api/res/post/', restFul.restPost)
-    router.put('/api/res/put/', restFul.restPut)
+    router.get('/api/resF/', restFul.restGet)
+    router.post('/api/resF/', restFul.restPost)
+    router.put('/api/resF/', restFul.restPut)
 
-    // 上传文件
-    router.post('/api/upload/', upload.single('file'), file.uploadFile) 
+    /**
+     * @des 接收 FormData 上传的数据，文件
+     */
+    // router.post('/api/upload/', upload.single('file'), file.upFormData) 
+    router.post('/api/upload/', (ctx: any) => {
+        console.log(ctx.request.body);
+        ctx.body = 'ss'
+    }) 
 
     /**
     * @des 以下两个接口用于单页面路由与indexedDB
-    *  事例：http://localhost:2500/page/one；http://localhost:2500/html/a/
-    */
+    *  示例：http://localhost:2500/page/one/
+     */
     router.get('/page/:path/', file.renderSPA)
+    // 示例：http://localhost:2500/html/a/
     router.get('/html/:htmlFileName/', file.renderHtml)
 
     /**

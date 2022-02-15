@@ -33,8 +33,8 @@ app
     // 当前端的 credentials 是true时，这里也必须是true
     credentials: true
 }))
-    .use(views(path_1.default.join(__dirname + '../views/pug'), { extension: 'pug' }))
-    .use(koaStatic(path_1.default.join(__dirname + '../views/public')))
+    .use(koaStatic(path_1.default.join(__dirname, '../views/public')))
+    .use(views(path_1.default.join(__dirname, '../views/pug'), { extension: 'pug' }))
     .use((0, koa_bodyparser_1.default)())
     .use(router.routes());
 router.get('/', (ctx) => {

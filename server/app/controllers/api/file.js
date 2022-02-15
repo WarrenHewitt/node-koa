@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateFileContent = exports.uploadFile = exports.upFormData = exports.upBase64 = exports.renderHtml = exports.renderSPA = void 0;
+exports.updateFileContent = exports.upFormData = exports.upBase64 = exports.renderHtml = exports.renderSPA = void 0;
 /**
  * @desc 文件处理相关操作
  */
@@ -20,6 +20,7 @@ function renderSPA(ctx, next) {
     /**
      * 路由中使用/:paramsName,可以用ctx.params.paramsName获取参数
      */
+    console.log(ctx.params.path); // one
     ctx.response.type = 'html';
     ctx.response.body = fs_1.default.createReadStream('./server/views/html/singlePageRoute.html');
     return next();
@@ -56,30 +57,16 @@ exports.upBase64 = upBase64;
  * @desc 保存通过formData 方式传过来的图片
  */
 const upFormData = (ctx) => {
-    const data = ctx.request.body.files.data;
-    const savePath = path_1.default.join(`./files`, data.name);
-    const reader = fs_1.default.createReadStream(data.path);
-    const writer = fs_1.default.createWriteStream(savePath);
-    console.log(reader.pipe(writer));
-    ctx.body = 'http://localhost:1112/' + data.name;
-};
-exports.upFormData = upFormData;
-/**
- * @desc 接收上传的excel等文件
- */
-const uploadFile = (ctx, next) => {
-    console.log(ctx);
-    // const data = ctx.request.body.file.data;
-    // const savePath = path.join(`./`, data.name)
+    console.log('233333', ctx.request.body);
+    // const data = ctx.request.body.files.data;
+    // const savePath = path.join(`./files`, data.name)
     // const reader = fs.createReadStream(data.path)
     // const writer = fs.createWriteStream(savePath)
-    // // ctx.body = 'http://localhost:1112/' + data.name
-    // console.log(reader.pipe(writer), savePath)
+    // console.log(reader.pipe(writer))
     // ctx.body = 'http://localhost:1112/' + data.name 
-    ctx.body = 'http://localhost:1112/';
-    next();
+    ctx.body = 'success';
 };
-exports.uploadFile = uploadFile;
+exports.upFormData = upFormData;
 /**
  * @desc 更新data/data.json文件中的数据
  */
