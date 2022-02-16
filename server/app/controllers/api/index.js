@@ -33,6 +33,7 @@ const koa_multer_1 = __importDefault(require("koa-multer"));
 const file = __importStar(require("./file"));
 const restFul = __importStar(require("./restFul"));
 // import financial from './financial'
+/* 用法参考 https://github.com/expressjs/multer */
 const upload = (0, koa_multer_1.default)({ dest: path_1.default.join(__dirname + '/uploadFiles/') });
 exports.default = (router) => {
     /**
@@ -44,11 +45,7 @@ exports.default = (router) => {
     /**
      * @des 接收 FormData 上传的数据，文件
      */
-    // router.post('/api/upload/', upload.single('file'), file.upFormData) 
-    router.post('/api/upload/', (ctx) => {
-        console.log(ctx.request.body);
-        ctx.body = 'ss';
-    });
+    router.post('/api/upload/', upload.single('file'), file.upFormData);
     /**
     * @des 以下两个接口用于单页面路由与indexedDB
     *  示例：http://localhost:2500/page/one/

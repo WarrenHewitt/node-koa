@@ -13,6 +13,7 @@ import * as api from './api'
 import * as restFul from './restFul'
 // import financial from './financial'
 
+/* 用法参考 https://github.com/expressjs/multer */
 const upload = multer({ dest: path.join(__dirname + '/uploadFiles/') })
 
 export default (router: any) => {
@@ -26,11 +27,7 @@ export default (router: any) => {
     /**
      * @des 接收 FormData 上传的数据，文件
      */
-    // router.post('/api/upload/', upload.single('file'), file.upFormData) 
-    router.post('/api/upload/', (ctx: any) => {
-        console.log(ctx.request.body);
-        ctx.body = 'ss'
-    }) 
+    router.post('/api/upload/', upload.single('file'), file.upFormData) 
 
     /**
     * @des 以下两个接口用于单页面路由与indexedDB
