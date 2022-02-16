@@ -14,11 +14,12 @@ import koaStatic = require('koa-static')
  */
 import views = require('koa-views')
 
-/**
- * @desc 支持json, form, text 类型的 body
- * 引入中间件后，会在ctx.request.body放入请求的参数
- */
-import bodyParser from 'koa-bodyparser'
+// /**
+//  * @desc 支持json, form, text 类型的 body
+//  * 引入中间件后，会在ctx.request.body放入请求的参数
+//  */
+// import bodyParser from 'koa-bodyparser'
+import koaBody from 'koa-body'
 
 // 设置跨域中间件
 import cors = require('koa2-cors')
@@ -36,7 +37,13 @@ app
     }))
     .use(koaStatic(path.join(__dirname, '../views/public')))
     .use(views(path.join(__dirname, '../views/pug'), { extension: 'pug' }))
-    .use(bodyParser())
+    // .use(bodyParser())
+    .use(koaBody({ 
+        multipart: true,
+        formidable: { 
+            uploadDir: path.join(__dirname, '../tempFiles')
+        }
+    }))
     .use(router.routes())
 
 router.get('/', (ctx: any) => {

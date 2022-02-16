@@ -19,7 +19,6 @@
   "dependencies": {
     "@types/koa": "^2.13.4",
     "@types/koa-bodyparser": "^4.3.3",
-    "@types/koa-multer": "^1.0.1",
     "@types/koa-router": "^7.4.4",
     "@types/koa-static": "^4.0.2",
     "@types/koa-views": "^7.0.0",
@@ -35,8 +34,8 @@
     "graphql": "^15.6.1",
     "inquirer": "^8.2.0",
     "koa": "^2.13.4",
+    "koa-body": "^4.2.0",
     "koa-bodyparser": "^4.3.0",
-    "koa-multer": "^1.0.2",
     "koa-router": "^10.1.1",
     "koa-static": "^5.0.0",
     "koa-views": "^7.0.1",
@@ -47,6 +46,7 @@
     "puppeteer": "^10.4.0"
   },
   "devDependencies": {
+    "koa-busboy": "^1.2.0",
     "pug": "^3.0.2",
     "tslint": "^6.1.3"
   }

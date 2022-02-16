@@ -8,9 +8,10 @@ const common_1 = require("../../utils/common");
  */
 function restGet(ctx) {
     // 获取参数采用 ctx.query 或 ctx.request.query 
-    console.log('get queryString', ctx.request.query);
+    console.log('get queryString', ctx.query);
     ctx.response.body = (0, common_1.formatReturnData)({
-        method: 'get'
+        method: 'get',
+        params: ctx.request.query
     });
 }
 exports.restGet = restGet;

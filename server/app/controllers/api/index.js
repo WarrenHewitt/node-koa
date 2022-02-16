@@ -22,18 +22,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const path_1 = __importDefault(require("path"));
-/**
- * @des 操作 multipart/form-data
- */
-const koa_multer_1 = __importDefault(require("koa-multer"));
 /**
  * @des 当没有默认导出时要用 * 防止报错
  */
 const file = __importStar(require("./file"));
 const restFul = __importStar(require("./restFul"));
 // import financial from './financial'
-const upload = (0, koa_multer_1.default)({ dest: path_1.default.join(__dirname + '/uploadFiles/') });
+/**
+ * @des 操作 multipart/form-data
+ */
+const koa_busboy_1 = __importDefault(require("koa-busboy"));
+const uploader = (0, koa_busboy_1.default)({
+    dest: 'server/tempFiles',
+    /* 其它参数参考 https://github.com/dominhhai/koa-busboy */
+    // dest: path.join(__dirname , '../../../tempFiles/'),
+    fnDestFilename: (fieldname, filename) => {
+        console.log(fieldname, filename);
+        return 'fileup';
+    }
+});
 exports.default = (router) => {
     /**
      * @des 测试restFul 接口, 以及参数的获取
@@ -44,11 +51,7 @@ exports.default = (router) => {
     /**
      * @des 接收 FormData 上传的数据，文件
      */
-    // router.post('/api/upload/', upload.single('file'), file.upFormData) 
-    router.post('/api/upload/', (ctx) => {
-        console.log(ctx.request.body);
-        ctx.body = 'ss';
-    });
+    router.post('/api/upload/', file.upFormData);
     /**
     * @des 以下两个接口用于单页面路由与indexedDB
     *  示例：http://localhost:2500/page/one/

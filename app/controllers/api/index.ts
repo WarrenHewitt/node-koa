@@ -1,10 +1,4 @@
 import path from 'path'
-
-/**
- * @des 操作 multipart/form-data 
- */
-import multer from 'koa-multer'
-
 /**
  * @des 当没有默认导出时要用 * 防止报错
  */
@@ -13,7 +7,20 @@ import * as api from './api'
 import * as restFul from './restFul'
 // import financial from './financial'
 
-const upload = multer({ dest: path.join(__dirname + '/uploadFiles/') })
+
+/**
+ * @des 操作 multipart/form-data 
+ */
+import koaBusboy from 'koa-busboy'
+const uploader = koaBusboy({
+    dest: 'server/tempFiles',
+    /* 其它参数参考 https://github.com/dominhhai/koa-busboy */
+    // dest: path.join(__dirname , '../../../tempFiles/'),
+    fnDestFilename: (fieldname: string, filename:string ) => {
+        console.log(fieldname, filename);
+        return 'fileup'
+    }
+})
 
 export default (router: any) => {
     /**
@@ -26,11 +33,7 @@ export default (router: any) => {
     /**
      * @des 接收 FormData 上传的数据，文件
      */
-    // router.post('/api/upload/', upload.single('file'), file.upFormData) 
-    router.post('/api/upload/', (ctx: any) => {
-        console.log(ctx.request.body);
-        ctx.body = 'ss'
-    }) 
+    router.post('/api/upload/', file.upFormData)
 
     /**
     * @des 以下两个接口用于单页面路由与indexedDB

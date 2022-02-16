@@ -13,6 +13,7 @@ const path_1 = __importDefault(require("path"));
  * 格式化时间
  */
 const dayjs_1 = __importDefault(require("dayjs"));
+const common_1 = require("../../utils/common");
 /**
  * @desc 单页面路由实现
  */
@@ -56,15 +57,25 @@ exports.upBase64 = upBase64;
 /**
  * @desc 保存通过formData 方式传过来的图片
  */
-const upFormData = (ctx) => {
-    console.log('233333', ctx.request.body);
-    // const data = ctx.request.body.files.data;
-    // const savePath = path.join(`./files`, data.name)
-    // const reader = fs.createReadStream(data.path)
-    // const writer = fs.createWriteStream(savePath)
-    // console.log(reader.pipe(writer))
-    // ctx.body = 'http://localhost:1112/' + data.name 
-    ctx.body = 'success';
+const upFormData = async (ctx) => {
+    // ctx.request.body  // 一般字段在 body 中
+    const data = ctx.request.files.upFile;
+    const savePath = path_1.default.join(__dirname, `../../../views/public/uploadFiles/${data.name}`);
+    const reader = fs_1.default.createReadStream(data.path); // data.path 文件临时保存路径
+    const writer = fs_1.default.createWriteStream(savePath);
+    const result = new Promise((resolve) => {
+        writer.on('finish', () => {
+            fs_1.default.unlinkSync(data.path);
+            resolve((0, common_1.formatReturnData)({ url: `http://localhost:2500/uploadFiles/${data.name}` }));
+        });
+        writer.on('error', () => {
+            fs_1.default.unlinkSync(data.path);
+            resolve('发生错误');
+        });
+        reader.pipe(writer);
+    });
+    ctx.body = await result;
+    // ctx.body = 
 };
 exports.upFormData = upFormData;
 /**
