@@ -5,11 +5,13 @@ import { formatReturnData } from "../../utils/common";
  */
 export function restGet(ctx: any) {
     // 获取参数采用 ctx.query 或 ctx.request.query 
-    console.log('get queryString', ctx.request.query );
+    console.log('get queryString', ctx.query);
     ctx.response.body = formatReturnData({
-        method: 'get'
+        method: 'get',
+        params: ctx.request.query
     })
 }
+
 
 /**
  * @des post方法

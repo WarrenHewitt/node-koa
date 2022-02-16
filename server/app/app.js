@@ -17,10 +17,9 @@ const koaStatic = require("koa-static");
  */
 const views = require("koa-views");
 /**
- * @desc 支持json, form, text 类型的 body
- * 引入中间件后，会在ctx.request.body放入请求的参数
+ * @desc 可以获取 application/json 和  multipart/form-data 的数据
  */
-const koa_bodyparser_1 = __importDefault(require("koa-bodyparser"));
+const koa_body_1 = __importDefault(require("koa-body"));
 // 设置跨域中间件
 const cors = require("koa2-cors");
 const app = new koa_1.default();
@@ -35,7 +34,12 @@ app
 }))
     .use(koaStatic(path_1.default.join(__dirname, '../views/public')))
     .use(views(path_1.default.join(__dirname, '../views/pug'), { extension: 'pug' }))
-    .use((0, koa_bodyparser_1.default)())
+    .use((0, koa_body_1.default)({
+    multipart: true,
+    formidable: {
+        uploadDir: path_1.default.join(__dirname, '../tempFiles')
+    }
+}))
     .use(router.routes());
 router.get('/', (ctx) => {
     ctx.response.body = 'hello koa-typescript';

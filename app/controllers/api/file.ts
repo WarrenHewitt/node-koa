@@ -7,6 +7,7 @@ import path from 'path'
  * 格式化时间
  */
 import dayJs from 'dayjs'
+import { formatReturnData } from "../../utils/common";
 
 
 /**
@@ -59,16 +60,32 @@ export const upBase64 = (ctx: any) => {
 /**
  * @desc 保存通过formData 方式传过来的图片
  */
-export const upFormData = (ctx: any) =>  {
-    console.log('233333', ctx.request.body);
-    // const data = ctx.request.body.files.data;
-    // const savePath = path.join(`./files`, data.name)
-    // const reader = fs.createReadStream(data.path)
-    // const writer = fs.createWriteStream(savePath)
+export const upFormData = async (ctx: any) =>  {
+    // ctx.request.body  // 一般字段在 body 中
+    const data = ctx.request.files.upFile;
+    const savePath = path.join(__dirname, `../../../views/public/uploadFiles/${data.name}`)
+    const reader = fs.createReadStream(data.path) // data.path 文件临时保存路径
+    const writer = fs.createWriteStream(savePath)
 
-    // console.log(reader.pipe(writer))
-    // ctx.body = 'http://localhost:1112/' + data.name 
-    ctx.body = 'success' 
+    
+    const result =  new Promise((resolve) => {
+        writer.on('finish', () => {
+            fs.unlinkSync(data.path)
+
+            resolve(formatReturnData({ url: `http://localhost:2500/uploadFiles/${data.name}` }))
+        });
+
+        writer.on('error', () => {
+            fs.unlinkSync(data.path)
+
+            resolve('发生错误')
+        });
+        
+        reader.pipe(writer)
+    })
+
+    ctx.body = await result
+    // ctx.body = 
 }
 
 
