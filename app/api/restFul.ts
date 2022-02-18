@@ -1,4 +1,4 @@
-import { formatReturnData } from "../../utils/common";
+import { formatReturnData } from "../utils/common";
 /**
  * @des get方法
  * @param ctx 

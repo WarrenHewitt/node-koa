@@ -1,5 +1,5 @@
-import DBOperate from '../../database/mysql'
-import { formatReturnData } from '../../utils/common'
+import DBOperate from '../database/mysql'
+import { formatReturnData } from '../utils/common'
 
 export default{
     async getCompany(ctx:any){

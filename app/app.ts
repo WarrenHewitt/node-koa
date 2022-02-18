@@ -73,7 +73,7 @@ router.get('/pug/', async (ctx: any) => {
 /**
  * @desc 以下为 api 接口
  */
-import adminApi from './controllers/api/index';
+import adminApi from './api/index';
 adminApi(router)
 
 /**

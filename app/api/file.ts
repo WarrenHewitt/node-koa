@@ -7,7 +7,7 @@ import path from 'path'
  * 格式化时间
  */
 import dayJs from 'dayjs'
-import { formatReturnData } from "../../utils/common";
+import { formatReturnData } from "../utils/common";
 
 
 /**

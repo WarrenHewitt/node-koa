@@ -1,4 +1,4 @@
-import mongoose from '../../database/mongo'
+import mongoose from '../database/mongo'
 
 const getUsers = () => {
     return mongoose.query()

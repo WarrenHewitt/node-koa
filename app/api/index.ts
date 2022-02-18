@@ -1,10 +1,10 @@
-import path from 'path'
 /**
  * @des 当没有默认导出时要用 * 防止报错
  */
 import * as file from './file'
-import * as api from './api'
 import * as restFul from './restFul'
+import database from '../database/mongo'
+
 // import financial from './financial'
 
 export default (router: any) => {
@@ -32,20 +32,13 @@ export default (router: any) => {
      * @des 修改/data/data.json文件
      */
     router.post('/api/updateFinancialData/', file.updateFileContent)
-
+    
+    
     /**
-     * @des vue-admin financial板块
+     * @des 访问 mongo 数据库
      */
-
-    /**
-     * 获取所有的company
-     */
-    // router.get('/api/financial/company/',financial.getCompany)
-    // router.get('/api/financial/product/',financial.getProducts)
-    // router.post('/api/financial/product/',financial.productUpdate)
-
-    /**
-     * @des  for work test
-     */
-
+    router.get('/api/mongo/', (ctx:any) => {
+        database()
+        ctx.body = 'mongo'
+    })
 }

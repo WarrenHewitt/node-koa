@@ -66,7 +66,7 @@ router.get('/pug/', async (ctx) => {
 /**
  * @desc 以下为 api 接口
  */
-const index_1 = __importDefault(require("./controllers/api/index"));
+const index_1 = __importDefault(require("./api/index"));
 (0, index_1.default)(router);
 /**
  * @desc 以下为 部分数据库 api 接口
