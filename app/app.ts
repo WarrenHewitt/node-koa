@@ -79,16 +79,20 @@ adminApi(router)
 /**
  * @desc 以下为 部分数据库 api 接口
  */
-import databaseApi from './controllers/databaseOperate/index';
-databaseApi(router)
+// import databaseApi from './controllers/databaseOperate/index';
+// databaseApi(router)
 
 /**
  * @desc puppeteer
  */
-import { screen } from './puppeteer/puppeteer';
+import { screen, menu } from './puppeteer/puppeteer';
 router.get('/api/puppeteer/screen', (ctx: any) => {
     screen()
-    ctx.response.body = 2333
+    ctx.response.body = 'success'
+})
+router.get('/api/puppeteer/menu', (ctx: any) => {
+    menu()
+    ctx.response.body = 'success12'
 })
 
  

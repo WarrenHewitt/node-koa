@@ -71,15 +71,19 @@ const index_1 = __importDefault(require("./api/index"));
 /**
  * @desc 以下为 部分数据库 api 接口
  */
-const index_2 = __importDefault(require("./controllers/databaseOperate/index"));
-(0, index_2.default)(router);
+// import databaseApi from './controllers/databaseOperate/index';
+// databaseApi(router)
 /**
  * @desc puppeteer
  */
 const puppeteer_1 = require("./puppeteer/puppeteer");
 router.get('/api/puppeteer/screen', (ctx) => {
     (0, puppeteer_1.screen)();
-    ctx.response.body = 2333;
+    ctx.response.body = 'success';
+});
+router.get('/api/puppeteer/menu', (ctx) => {
+    (0, puppeteer_1.menu)();
+    ctx.response.body = 'success12';
 });
 /**
  * 监听报错信息
