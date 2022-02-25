@@ -78,12 +78,10 @@ const index_1 = __importDefault(require("./api/index"));
  */
 const puppeteer_1 = require("./puppeteer/puppeteer");
 router.get('/api/puppeteer/screen', (ctx) => {
-    (0, puppeteer_1.screen)();
-    ctx.response.body = 'success';
+    (0, puppeteer_1.screen)(ctx);
 });
-router.get('/api/puppeteer/menu', (ctx) => {
-    (0, puppeteer_1.menu)();
-    ctx.response.body = 'success12';
+router.get('/api/puppeteer/menu', async (ctx) => {
+    await (0, puppeteer_1.menu)(ctx);
 });
 /**
  * 监听报错信息

@@ -87,12 +87,10 @@ adminApi(router)
  */
 import { screen, menu } from './puppeteer/puppeteer';
 router.get('/api/puppeteer/screen', (ctx: any) => {
-    screen()
-    ctx.response.body = 'success'
+    screen(ctx)
 })
-router.get('/api/puppeteer/menu', (ctx: any) => {
-    menu()
-    ctx.response.body = 'success12'
+router.get('/api/puppeteer/menu', async (ctx: any) => {
+    await menu(ctx)
 })
 
  
