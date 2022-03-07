@@ -86,12 +86,17 @@ adminApi(router)
  * @desc puppeteer
  */
 import { screen, menu } from './puppeteer/puppeteer';
+import { jueJin } from './puppeteer/jueJin';
+/* 截屏demo */
 router.get('/api/puppeteer/screen', (ctx: any) => {
     screen(ctx)
 })
+/* 获取页面内容 demo */
 router.get('/api/puppeteer/menu', async (ctx: any) => {
     await menu(ctx)
 })
+/* 获取cookbook */
+router.get('/api/cookbook/', jueJin)
 
  
 /**

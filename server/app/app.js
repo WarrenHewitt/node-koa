@@ -77,12 +77,17 @@ const index_1 = __importDefault(require("./api/index"));
  * @desc puppeteer
  */
 const puppeteer_1 = require("./puppeteer/puppeteer");
+const jueJin_1 = require("./puppeteer/jueJin");
+/* 截屏demo */
 router.get('/api/puppeteer/screen', (ctx) => {
     (0, puppeteer_1.screen)(ctx);
 });
+/* 获取页面内容 demo */
 router.get('/api/puppeteer/menu', async (ctx) => {
     await (0, puppeteer_1.menu)(ctx);
 });
+/* 获取cookbook */
+router.get('/api/cookbook/', jueJin_1.jueJin);
 /**
  * 监听报错信息
  */
