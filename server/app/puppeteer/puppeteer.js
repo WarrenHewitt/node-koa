@@ -53,7 +53,6 @@ const menu = async (ctx) => {
      * 通过evaluate函数执行自定义的js代码获取要爬取的数据
      * evaluate 可以传递 ElementHandle
      * page.evaluate 意为在浏览器环境执行脚本，可传入第二个参数作为句柄，而 page.$eval 则针对选中的一个 DOM 元素执行操作
-     * 只能执行浏览器可执行的js代码 引入的模块不能在此执行
      */
     const span = await page.$('#hotsearch-refresh-btn > span');
     const data = await page.evaluate((span) => {
