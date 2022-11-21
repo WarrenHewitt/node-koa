@@ -1,6 +1,6 @@
 #!/bin/sh
 ###
- # @LastEditTime: 2022-11-19 21:05:55
+ # @LastEditTime: 2022-11-21 22:40:40
 ### 
 # 使用变量时 花括号是可选的，加不加都行，加花括号是为了帮助解释器识别变量的边界
 # 变量使用时加 $
@@ -11,7 +11,9 @@ function waiting()
     i=0
     while [ $i -le 100 ]
     do
-        for j in '⣾' '⣷' '⣯' '⣟' '⡿' '⢿' '⣻' '⣽'
+        #  https://github.com/sindresorhus/cli-spinners/blob/main/spinners.json  spinner 种类参考  有80多种
+        # for j in '⣾' '⣷' '⣯' '⣟' '⡿' '⢿' '⣻' '⣽'
+        for j in '⠋' '⠙' '⠹' '⠸' '⠼' '⠴' '⠦' '⠧' '⠇' '⠏'
         do
             if [ $breakTag=="1" ];then
             # \e[?25l 隐藏光标
