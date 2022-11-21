@@ -1,25 +1,93 @@
 #!/bin/sh
 ###
- # @LastEditTime: 2022-11-18 18:27:03
+ # @LastEditTime: 2022-11-19 21:05:55
 ### 
-
+# 使用变量时 花括号是可选的，加不加都行，加花括号是为了帮助解释器识别变量的边界
+# 变量使用时加 $
+# 变量赋值时 不加 $
+breakTag="1"
 function waiting()
 {
     i=0
-    while [ $i -le 10 ]
+    while [ $i -le 100 ]
     do
         for j in '⣾' '⣷' '⣯' '⣟' '⡿' '⢿' '⣻' '⣽'
         do
-            printf "test waiting: \e[1;32m%s\e[0m \r" "$j"
+            if [ $breakTag=="1" ];then
+            # \e[?25l 隐藏光标
+            printf "\e[?25l \e[1;32m %s\e[0m test waiting \r" "$j"
             sleep 0.1
+            breakTag="2"
+            elif [ $breakTag=="2" ]; then
+                break 
+            fi
         done
         let i=i+4
     done
     # 输出16个空格 覆盖； % 后加数字标识重复多少次
-    printf "%16s\r" " "
+    # printf "%16s\r" " "
+    # 先清除光标到行尾的内容 \e[K  
+    # 再显示光标 \e[?25h
+    printf "\e[K \e[?25h"
     printf "\e[1;32mfinish\e[0m"
 }
-waiting
+# waiting
+
+# 注意 [  ] 内部前后有空格
+# if [ "a" == "b" ]; then
+# echo "equal"
+# elif [  ];then
+# echo "else if"   
+# else
+# echo "not equal"
+# fi
+# -eq	相等
+# -ne	不相等
+# -gt	> (("$x" > "$y")) 需要双括号
+# -lt	<
+# -ge	>= 
+# -le	<=
+
+needBreak="no"
+function f1(){
+    for n in {1..20}
+    do
+    echo "${needBreak}"
+    if [ $needBreak != 'no' ]; then
+        echo "no: $n"
+        sleep 0.1
+        break
+    elif [ $n -eq 6 ]; then
+        echo "equal: 20"
+        needBreak="ok"
+    else
+        sleep 0.5
+        echo "else: ${n}"
+    fi
+    done
+}
+
+function f2(){
+    # sleep 2 
+    echo "1 ${needBreak}"
+
+    needBreak="ok"
+
+    echo "2 ${needBreak}"
+
+    echo "f2 execute"
+
+}
+
+function f3() {
+    echo "f3 ${needBreak}"
+}
+
+f1 & f2
+
+wait
+
+echo "weeee"
 
 
 # i=0
