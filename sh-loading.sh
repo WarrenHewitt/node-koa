@@ -1,6 +1,6 @@
 #!/bin/sh
 ###
- # @LastEditTime: 2022-11-18 18:27:03
+ # @LastEditTime: 2022-11-21 09:25:51
 ### 
 
 function waiting()
@@ -8,7 +8,9 @@ function waiting()
     i=0
     while [ $i -le 10 ]
     do
-        for j in '⣾' '⣷' '⣯' '⣟' '⡿' '⢿' '⣻' '⣽'
+        #  https://github.com/sindresorhus/cli-spinners/blob/main/spinners.json  spinner 种类参考  有80多种
+        # for j in '⣾' '⣷' '⣯' '⣟' '⡿' '⢿' '⣻' '⣽'
+        for j in '⠋' '⠙' '⠹' '⠸' '⠼' '⠴' '⠦' '⠧' '⠇' '⠏'
         do
             printf "test waiting: \e[1;32m%s\e[0m \r" "$j"
             sleep 0.1
