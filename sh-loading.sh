@@ -1,40 +1,67 @@
 #!/bin/sh
 ###
- # @LastEditTime: 2022-11-21 22:40:40
+ # @LastEditTime: 2022-11-24 15:41:13
 ### 
 # 使用变量时 花括号是可选的，加不加都行，加花括号是为了帮助解释器识别变量的边界
 # 变量使用时加 $
 # 变量赋值时 不加 $
-breakTag="1"
-function waiting()
-{
-    i=0
-    while [ $i -le 100 ]
-    do
+# 命令使用方式 1. 反引号` ` 2. $()  
+# variable=`commands`  commands 如果是多命令 用分号隔开
+# mktemp 创建临时文件
+breakTag=$(mktemp) 
+echo 'no' > $breakTag;
+function waiting() {
+    local break=""
+    while [ `cat $breakTag` == "no" ] ; do
+        break=`cat "${breakTag}"`
         #  https://github.com/sindresorhus/cli-spinners/blob/main/spinners.json  spinner 种类参考  有80多种
         # for j in '⣾' '⣷' '⣯' '⣟' '⡿' '⢿' '⣻' '⣽'
         for j in '⠋' '⠙' '⠹' '⠸' '⠼' '⠴' '⠦' '⠧' '⠇' '⠏'
         do
-            if [ $breakTag=="1" ];then
             # \e[?25l 隐藏光标
             printf "\e[?25l \e[1;32m %s\e[0m test waiting \r" "$j"
             sleep 0.1
-            breakTag="2"
-            elif [ $breakTag=="2" ]; then
-                break 
-            fi
         done
-        let i=i+4
     done
+    
     # 输出16个空格 覆盖； % 后加数字标识重复多少次
     # printf "%16s\r" " "
     # 先清除光标到行尾的内容 \e[K  
     # 再显示光标 \e[?25h
     printf "\e[K \e[?25h"
-    printf "\e[1;32mfinish\e[0m"
-}
-# waiting
 
+    echo "finish"
+}
+
+function f1() {
+    sleep 1
+    echo 'yes' > $breakTag
+}
+
+waiting & f1
+
+wait
+
+
+# aa="no"
+# 定义int类型
+# declare -i bb=1
+# 可以直接判断 也可以使用命令
+# while [[ $aa="yes" ]] ;
+# do
+#     sleep 0.1
+#     # echo "*** $aa"
+#     ((bb++))
+#     # echo "*** $bb"
+#     if [ $bb -eq 10 ] ; then
+#         echo "====10"
+#         aa="yes"
+#     fi
+# done
+
+
+
+# while 语句和 if else 语句中的 condition 用法都是一样的，你可以使用 test 或 [] 命令，也可以使用 (()) 或 [[]]，
 # 注意 [  ] 内部前后有空格
 # if [ "a" == "b" ]; then
 # echo "equal"
@@ -43,6 +70,7 @@ function waiting()
 # else
 # echo "not equal"
 # fi
+# = 判断相等 == 等价
 # -eq	相等
 # -ne	不相等
 # -gt	> (("$x" > "$y")) 需要双括号
@@ -50,46 +78,7 @@ function waiting()
 # -ge	>= 
 # -le	<=
 
-needBreak="no"
-function f1(){
-    for n in {1..20}
-    do
-    echo "${needBreak}"
-    if [ $needBreak != 'no' ]; then
-        echo "no: $n"
-        sleep 0.1
-        break
-    elif [ $n -eq 6 ]; then
-        echo "equal: 20"
-        needBreak="ok"
-    else
-        sleep 0.5
-        echo "else: ${n}"
-    fi
-    done
-}
-
-function f2(){
-    # sleep 2 
-    echo "1 ${needBreak}"
-
-    needBreak="ok"
-
-    echo "2 ${needBreak}"
-
-    echo "f2 execute"
-
-}
-
-function f3() {
-    echo "f3 ${needBreak}"
-}
-
-f1 & f2
-
-wait
-
-echo "weeee"
+echo "============"
 
 
 # i=0
