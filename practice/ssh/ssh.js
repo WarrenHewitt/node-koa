@@ -1,5 +1,8 @@
 /*
- * @LastEditTime: 2022-11-08 15:51:22
+ * @LastEditTime: 2022-11-30 16:05:26
+ */
+/**
+ * 推荐 shelljs + 脚本的模式
  */
 const { Client } = require('ssh2');
 

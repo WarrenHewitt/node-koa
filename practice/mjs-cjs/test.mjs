@@ -1,10 +1,16 @@
-const inquirer = require('inquirer');
-const generatorTemplate = require('./generatorTemplate.js');
+/*
+ * @LastEditTime: 2022-11-30 16:02:31
+ */
+import inquirer from 'inquirer'
+
+/**
+ * mjs  用 es6 语法
+ * package.json "type": "module",
+ */
 
 /**
  * @des 还有一种方式参见  commander.js
  */
-
 inquirer
     .prompt([
         {
@@ -23,10 +29,9 @@ inquirer
     ])
     .then(answers => {
         console.log(answers);
-        /* 输出值为：{ toBeDelivered: true, choices: [ 'name' ] } */
-        if(answers.toBeDelivered && answers.choices[0] === 'yes') {
-            generatorTemplate.generator();
-        } else {
-            console.log('不生成模板');
-        }
     });
+
+
+    export const test = () => {
+        console.log('test cjs');
+    }
