@@ -75,6 +75,7 @@ function copyFolder(copiedPath, resultPath, direct) {
         /**
          * @des 方式二：
          */
+        /* 获取地址下的文件和文件夹的名称集合，文件名包含后缀 */
         const files = fs.readdirSync(copiedPath, { withFileTypes: true });
         for (let i = 0; i < files.length; i++) {
             const cf = files[i]
@@ -132,7 +133,7 @@ function deleteFolder(delPath) {
     try {
         if (fs.existsSync(delPath)) {
             const delFn = function (address) {
-                /** 返回文件和文件夹名称 */
+                /* 获取地址下的文件和文件夹的名称集合，文件名包含后缀 */
                 const files = fs.readdirSync(address)
                 for (let i = 0; i < files.length; i++) {
                     const dirPath = path.join(address, files[i])

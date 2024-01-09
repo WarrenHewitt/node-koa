@@ -1,0 +1,10 @@
+{
+  "batchSetting": {
+      "onlinedevice": "online device",
+      "offlinedevice": "offline device",
+      "ipAdressInfo": "The IP address must not be on the same subnet as the LAN and Guest network.",
+      "configModifyGroupWarning": "The configuration will be sent to the selected group. Do you want to continue?",
+      "inputFirmwarePath": "Please input the firmware upgrade path",
+      "batchSetting": "Configure batch modification"
+  }
+}

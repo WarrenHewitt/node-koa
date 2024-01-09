@@ -1,0 +1,6 @@
+{
+  "bindDevice": {
+      "unbindConfirm": "Are you sure you want to unbind?",
+      "titleRebind": "Rebind Device"
+  }
+}

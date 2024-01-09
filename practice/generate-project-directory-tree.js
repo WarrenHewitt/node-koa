@@ -1,5 +1,5 @@
 /*
- * @LastEditTime: 2022-11-22 15:03:57
+ * @LastEditTime: 2023-11-22 11:07:45
  */
 /**
  * @describe 生成当前项目的目录树, 该文件必须放在项目跟目录下执行
@@ -22,6 +22,7 @@ const getFileAndFloder = (_path, name, deep) => {
 	/* 判断是否是文件夹 */
     if(fs.statSync(_path).isDirectory()) {
 
+        /* 获取地址下的文件和文件夹的名称集合，文件名包含后缀 */
         const _files = fs.readdirSync(_path);
 
         dir += `${ spaceLength(deep) }|- ${name}\n`;

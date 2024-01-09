@@ -1,0 +1,10 @@
+{
+  "batchSetting": {
+      "onlinedevice": "在线设备",
+      "offlinedevice": "不在线设备",
+      "ipAdressInfo": "IP地址不得与LAN和访客网络在同一子网中。",
+      "configModifyGroupWarning": "配置会下发到你选择的分组，是否继续？",
+      "inputFirmwarePath": "请输入固件升级地址",
+      "batchSetting": "配置批量修改"
+  }
+}
