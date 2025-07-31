@@ -41,9 +41,11 @@ function writeFile() {
     fs.writeFileSync(path.join('./directory-tree.md'), dir);
 }
 
-/** 获取当前文件夹名称 */
-const baseName = path.basename(__dirname);
+/* 需要处理的文件夹 */
+const targetPath = path.join(__dirname, './src/components')
+/* 生成的MD文档地址 */
+const resultPath = './directory-tree.md'
 
-getFileAndFloder(path.join(__dirname), baseName, 0);
+getFileAndFloder(targetPath, path.basename(targetPath), 0)
 
 writeFile();
