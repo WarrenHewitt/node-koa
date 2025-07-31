@@ -88,7 +88,7 @@
         |- database.js
         |- gql.js
 
-    |- practice  (实践部分)
+    |- script  (脚本)
         |- batTest  (.bat和.sh 语法实践 )
             |- test
                 |- test.js
